@@ -81,7 +81,7 @@ export function Contact() {
             </p>
             <p>
               <a className="font-semibold text-forest underline" href={profile.githubUrl}>
-                GitHub profile placeholder
+                GitHub profile
               </a>
             </p>
             <p>

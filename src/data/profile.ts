@@ -3,8 +3,8 @@ export const profile = {
   role: 'Cloud and Platform Engineer',
   supportingLine: 'AWS | Azure | Google Cloud | DevOps | Platform Support',
   location: 'North Tyneside / Newcastle upon Tyne, United Kingdom',
-  email: 'contact@example.com',
-  githubUrl: 'https://github.com/colin-chapman-placeholder',
+  email: 'colinchapm@googlemail.com',
+  githubUrl: 'https://github.com/Colinchapm',
   linkedinUrl: 'https://www.linkedin.com/in/colin-chapman-placeholder',
   cvDownloadPath: '/colin-chapman-cv.txt',
   summary:

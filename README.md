@@ -94,5 +94,5 @@ Update `public/colin-chapman-cv.txt` when Colin has a final reviewed public CV f
 - Three technical case-study routes are implemented.
 - Project architecture docs are implemented.
 - Contact form validates locally but is not connected to a backend.
-- GitHub and LinkedIn URLs are placeholders.
+- GitHub URL is configured and LinkedIn remains an optional placeholder.
 - Cloud Run deployment is prepared but not yet deployed.
