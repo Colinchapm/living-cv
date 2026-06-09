@@ -21,9 +21,9 @@ resource "google_artifact_registry_repository_iam_member" "deployer_artifact_wri
   member     = "serviceAccount:${google_service_account.github_deployer.email}"
 }
 
-resource "google_project_iam_member" "deployer_run_developer" {
+resource "google_project_iam_member" "deployer_run_admin" {
   project = var.project_id
-  role    = "roles/run.developer"
+  role    = "roles/run.admin"
   member  = "serviceAccount:${google_service_account.github_deployer.email}"
 }
 

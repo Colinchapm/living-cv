@@ -19,11 +19,13 @@ env:
   REGION: ${{ vars.GCP_REGION }}
   ARTIFACT_REGISTRY: ${{ vars.GCP_ARTIFACT_REGISTRY }}
   CLOUD_RUN_SERVICE: ${{ vars.GCP_CLOUD_RUN_SERVICE }}
+  CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT }}
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
   deploy:
     name: Build, push, and deploy
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -72,11 +74,29 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 
+      - name: Resolve deployment settings
+        run: |
+          RUNTIME_SERVICE_ACCOUNT="${CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT:-${CLOUD_RUN_SERVICE}-runtime@${PROJECT_ID}.iam.gserviceaccount.com}"
+          IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${CLOUD_RUN_SERVICE}:${IMAGE_TAG}"
+
+          if gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --platform managed \
+            > /dev/null 2>&1; then
+            DEPLOYMENT_MODE="update"
+          else
+            DEPLOYMENT_MODE="create"
+          fi
+
+          {
+            echo "RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SERVICE_ACCOUNT}"
+            echo "IMAGE_URI=${IMAGE_URI}"
+            echo "DEPLOYMENT_MODE=${DEPLOYMENT_MODE}"
+          } >> "${GITHUB_ENV}"
+
       - name: Build image
         run: |
-          IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${CLOUD_RUN_SERVICE}:${IMAGE_TAG}"
           docker build --tag "${IMAGE_URI}" .
-          echo "IMAGE_URI=${IMAGE_URI}" >> "${GITHUB_ENV}"
 
       - name: Push image
         run: docker push "${IMAGE_URI}"
@@ -87,6 +107,8 @@ jobs:
             --image "${IMAGE_URI}" \
             --region "${REGION}" \
             --platform managed \
+            --allow-unauthenticated \
+            --service-account "${RUNTIME_SERVICE_ACCOUNT}" \
             --port 8080 \
             --min-instances 0 \
             --max-instances 3 \
@@ -106,6 +128,19 @@ jobs:
             echo "REVISION=${REVISION}"
           } >> "${GITHUB_ENV}"
 
+      - name: Verify health endpoint
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if curl --fail --silent --show-error "${SERVICE_URL}/health"; then
+              exit 0
+            fi
+            echo "Health check attempt ${attempt} failed; retrying..."
+            sleep 10
+          done
+
+          echo "Cloud Run health check failed for ${SERVICE_URL}/health" >&2
+          exit 1
+
       - name: Write deployment summary
         run: |
           {
@@ -113,6 +148,7 @@ jobs:
             echo ""
             echo "- Service: ${CLOUD_RUN_SERVICE}"
             echo "- Region: ${REGION}"
+            echo "- Deployment mode: ${DEPLOYMENT_MODE}"
             echo "- Image: ${IMAGE_URI}"
             echo "- Revision: ${REVISION}"
             echo "- Service URL: ${SERVICE_URL}"

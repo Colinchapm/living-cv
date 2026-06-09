@@ -10,7 +10,7 @@ flowchart LR
   Deploy --> WIF["Google Workload Identity Federation"]
   WIF --> DeployerSA["Deployment service account"]
   DeployerSA --> ArtifactRegistry["Artifact Registry"]
-  DeployerSA --> CloudRun["Cloud Run service"]
+  DeployerSA --> CloudRun["Cloud Run service created or updated by Actions"]
   CloudRun --> RuntimeSA["Runtime service account"]
   Visitor["Employer or reviewer"] --> CloudRun
   CloudRun --> Health["/health endpoint"]
@@ -32,8 +32,8 @@ The production container uses a multi-stage Docker build:
 
 ## Infrastructure
 
-Terraform declares required Google Cloud APIs, Artifact Registry, Cloud Run, runtime and deployment service accounts, IAM bindings, and GitHub Workload Identity Federation.
+Terraform declares required Google Cloud APIs, Artifact Registry, runtime and deployment service accounts, IAM bindings, and GitHub Workload Identity Federation. Cloud Run service creation is intentionally performed by GitHub Actions after the first application image is pushed.
 
 ## Delivery
 
-Pull requests run install, lint, type-check, unit tests, Playwright smoke tests, and production build. Pushes to `main` can deploy immutable commit-SHA images to Cloud Run through GitHub Actions and Workload Identity Federation without service-account JSON keys.
+Pull requests run install, lint, type-check, unit tests, Playwright smoke tests, and production build. Pushes to `main` can deploy immutable commit-SHA images to Cloud Run through GitHub Actions and Workload Identity Federation without service-account JSON keys. The deployment workflow creates the Cloud Run service on the first deployment and updates it on later deployments.

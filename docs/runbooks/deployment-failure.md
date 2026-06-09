@@ -46,6 +46,7 @@ Check:
 - `GCP_ARTIFACT_REGISTRY`
 - Artifact Registry repository exists in the configured region.
 - Deployment service account has `roles/artifactregistry.writer` on the repository.
+- Docker auth was configured for `${GCP_REGION}-docker.pkg.dev`.
 
 ## Cloud Run Deploy Failures
 
@@ -53,10 +54,22 @@ Check:
 
 - `GCP_CLOUD_RUN_SERVICE`
 - Cloud Run API is enabled.
-- Deployment service account has `roles/run.developer` on the service.
+- Deployment service account has Cloud Run deployment permissions.
 - Deployment service account can act as the runtime service account.
 - The container listens on the Cloud Run `PORT`.
 - `/health` returns a successful response.
+- The runtime service account exists. If `GCP_CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT` is not configured, the workflow expects `${GCP_CLOUD_RUN_SERVICE}-runtime@${GCP_PROJECT_ID}.iam.gserviceaccount.com`.
+
+The service not existing is expected on first deployment. The workflow should report deployment mode `create` and then create the service.
+
+## Health Check Failures
+
+Check:
+
+- Cloud Run logs for container startup errors.
+- `nginx/default.conf.template` still exposes `/health`.
+- The app listens on the Cloud Run `PORT`.
+- The service URL in the workflow summary is reachable.
 
 ## Recovery
 

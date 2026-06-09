@@ -1,6 +1,6 @@
 # Google Cloud Run Deployment
 
-This project is prepared for secure automated deployment to Google Cloud Run from GitHub Actions.
+This project uses a two-stage deployment design so infrastructure can be bootstrapped before the first application container image exists.
 
 Deployments must use Google Workload Identity Federation. Do not create, download or store a service-account JSON key.
 
@@ -13,16 +13,72 @@ These values are used in examples and can be changed through Terraform variables
 - Artifact Registry repository: `living-cv`
 - Cloud Run service: `living-cv`
 
-## Deployment Behaviour
+## Stage A: Infrastructure Bootstrap
 
-- Pull requests run validation only and do not deploy.
-- Pushes to `main` build, push and deploy.
-- Images are tagged with the immutable Git commit SHA.
-- Cloud Run is configured for public access.
-- Cloud Run can scale to zero with `min_instance_count = 0`.
-- The container exposes `/health`, supports the Cloud Run `PORT`, and falls back to `index.html` for SPA routes.
-- GitHub Actions uses concurrency group `cloud-run-production` to prevent overlapping deployments.
-- The deployment workflow writes the deployed revision and service URL to the GitHub Actions summary.
+Terraform provisions the deployment foundation only:
+
+- required Google Cloud APIs
+- Artifact Registry
+- deployment service account
+- Cloud Run runtime service account
+- Workload Identity Pool
+- GitHub Workload Identity Provider
+- least-practical IAM bindings
+- repository and branch-restricted GitHub identity permissions
+
+Terraform does not create the initial Cloud Run service. That removes the dependency on a pre-existing application image.
+
+### Steps
+
+1. Create or select the Google Cloud project.
+2. Enable billing.
+3. Authenticate gcloud:
+
+   ```bash
+   gcloud auth login
+   ```
+
+4. Set the active project:
+
+   ```bash
+   gcloud config set project YOUR_GCP_PROJECT_ID
+   ```
+
+5. Initialise Terraform:
+
+   ```bash
+   terraform -chdir=infrastructure/terraform init
+   ```
+
+6. Run Terraform plan:
+
+   ```bash
+   terraform -chdir=infrastructure/terraform plan \
+     -var="project_id=YOUR_GCP_PROJECT_ID" \
+     -var="region=europe-west2" \
+     -var="artifact_registry_repository=living-cv" \
+     -var="cloud_run_service=living-cv" \
+     -var="github_repository=Colinchapm/living-cv"
+   ```
+
+7. Run Terraform apply after reviewing the plan:
+
+   ```bash
+   terraform -chdir=infrastructure/terraform apply \
+     -var="project_id=YOUR_GCP_PROJECT_ID" \
+     -var="region=europe-west2" \
+     -var="artifact_registry_repository=living-cv" \
+     -var="cloud_run_service=living-cv" \
+     -var="github_repository=Colinchapm/living-cv"
+   ```
+
+8. Retrieve Terraform outputs:
+
+   ```bash
+   terraform -chdir=infrastructure/terraform output
+   ```
+
+9. Add GitHub repository variables and secrets.
 
 ## Required GitHub Repository Variables
 
@@ -41,6 +97,16 @@ GCP_ARTIFACT_REGISTRY=living-cv
 GCP_CLOUD_RUN_SERVICE=living-cv
 ```
 
+Optional variable:
+
+- `GCP_CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT`
+
+If omitted, the deployment workflow uses:
+
+```text
+${GCP_CLOUD_RUN_SERVICE}-runtime@${GCP_PROJECT_ID}.iam.gserviceaccount.com
+```
+
 ## Required GitHub Repository Secrets
 
 Configure these as repository or production-environment secrets:
@@ -53,44 +119,94 @@ Use Terraform outputs for these values:
 - `workload_identity_provider`
 - `deployment_service_account`
 
-## Terraform
+## Stage B: First Application Deployment
 
-Terraform lives in `infrastructure/terraform`.
+After Terraform bootstrap and GitHub configuration, the GitHub Actions deployment workflow creates the first Cloud Run service.
 
-Create a local variables file from your real project values:
+### Steps
 
-```bash
-terraform -chdir=infrastructure/terraform init
-terraform -chdir=infrastructure/terraform plan \
-  -var="project_id=YOUR_GCP_PROJECT_ID" \
-  -var="region=europe-west2" \
-  -var="artifact_registry_repository=living-cv" \
-  -var="cloud_run_service=living-cv" \
-  -var="github_repository=Colinchapm/living-cv" \
-  -var="initial_image=europe-west2-docker.pkg.dev/YOUR_GCP_PROJECT_ID/living-cv/living-cv:bootstrap"
-```
+1. Trigger the first deployment by merging to `main` or using `workflow_dispatch`.
+2. GitHub Actions builds the application container.
+3. The workflow tags the image with the immutable Git commit SHA.
+4. The workflow pushes the image to Artifact Registry.
+5. The workflow checks whether the Cloud Run service exists.
+6. If the service does not exist, the workflow creates it.
+7. If the service exists, the workflow updates it with a new revision.
+8. The workflow configures public access with `--allow-unauthenticated`.
+9. The workflow uses the configured runtime service account.
+10. The workflow sets the region, service port, max instances and scale-to-zero behaviour.
+11. The workflow retrieves the public service URL.
+12. The workflow tests `/health`.
+13. The workflow confirms the deployed revision in the GitHub Actions summary.
+14. Review Cloud Run logs in Google Cloud Console or with:
 
-The first Cloud Run service creation needs an image that exists. Bootstrap options:
-
-1. Create Artifact Registry with Terraform targeted to the repository.
-2. Build and push a temporary bootstrap image.
-3. Run the full Terraform plan/apply.
-4. Let the GitHub Actions deployment workflow replace the service image with a commit-SHA image.
-
-Do not run `terraform apply` from this feature branch without reviewing the plan.
+    ```bash
+    gcloud run services logs read living-cv --region europe-west2
+    ```
 
 ## GitHub Actions
 
-`validate.yml` runs on pull requests and pushes to `main`.
+`validate.yml` runs on pull requests and pushes to `main`. Pull requests validate but never deploy.
 
-`deploy-gcp.yml` runs on pushes to `main` and through manual `workflow_dispatch`. It:
+`deploy-gcp.yml` runs on pushes to `main` and through explicit `workflow_dispatch`. It:
 
-1. Authenticates to Google Cloud using Workload Identity Federation.
-2. Builds the Docker image.
-3. Tags the image as `${GITHUB_SHA}`.
-4. Pushes the image to Artifact Registry.
-5. Deploys the image to Cloud Run. Public invocation is managed by Terraform, not by the deploy command.
-6. Writes the deployed revision and service URL to the job summary.
+1. Validates the app before deployment.
+2. Authenticates to Google Cloud using Workload Identity Federation.
+3. Builds the Docker image.
+4. Tags the image as `${GITHUB_SHA}`.
+5. Pushes the image to Artifact Registry.
+6. Creates or updates Cloud Run.
+7. Verifies `/health`.
+8. Writes the deployed revision and service URL to the job summary.
+
+## Troubleshooting
+
+### Missing GitHub Variables
+
+The `Validate deployment configuration` step fails when required variables are empty. Confirm:
+
+- `GCP_PROJECT_ID`
+- `GCP_REGION`
+- `GCP_ARTIFACT_REGISTRY`
+- `GCP_CLOUD_RUN_SERVICE`
+
+### Invalid Workload Identity Provider
+
+Authentication fails if `GCP_WORKLOAD_IDENTITY_PROVIDER` is missing or does not match the Terraform output. Confirm the provider allows repository `Colinchapm/living-cv` and branch `refs/heads/main`.
+
+### Insufficient IAM Permissions
+
+Cloud Run deployment requires the deployment service account to write Artifact Registry images, administer Cloud Run services and act as the runtime service account. Re-check Terraform IAM outputs and apply state.
+
+### Artifact Registry Authentication Failure
+
+Check that:
+
+- Artifact Registry API is enabled.
+- The repository exists in `GCP_REGION`.
+- Docker auth was configured for `${GCP_REGION}-docker.pkg.dev`.
+- The deployment service account has `roles/artifactregistry.writer` on the repository.
+
+### Cloud Run Service Not Found During First Deployment
+
+This is expected on the first deployment. The workflow detects the missing service and uses `gcloud run deploy` to create it.
+
+### Failed Health Check
+
+Check:
+
+- `/health` is served by nginx.
+- The service URL in the workflow summary is correct.
+- The container started successfully.
+- Cloud Run logs for nginx or container startup errors.
+
+### Application Not Listening on PORT
+
+The nginx entrypoint sets `PORT=${PORT:-8080}` and nginx listens on that value. If startup fails, inspect:
+
+- `nginx/default.conf.template`
+- `nginx/docker-entrypoint.d/30-render-cloud-run-port.sh`
+- Cloud Run container port configuration
 
 ## Manual Google Cloud Setup Checklist
 

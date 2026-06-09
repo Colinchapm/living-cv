@@ -27,13 +27,3 @@ variable "github_repository" {
   default     = "Colinchapm/living-cv"
 }
 
-variable "initial_image" {
-  description = "Initial image used to create the Cloud Run service. Replace with a pushed Artifact Registry image before first apply."
-  type        = string
-}
-
-variable "max_instance_count" {
-  description = "Maximum Cloud Run instances for the portfolio service."
-  type        = number
-  default     = 3
-}

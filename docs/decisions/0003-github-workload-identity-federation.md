@@ -16,5 +16,6 @@ Use Google Workload Identity Federation for GitHub Actions authentication. GitHu
 
 - No downloadable service-account JSON keys are required.
 - Deployment access can be limited to the main branch.
-- Google Cloud IAM grants can be scoped to Artifact Registry writing, Cloud Run deployment and runtime service-account usage.
+- Google Cloud IAM grants can be scoped to Artifact Registry writing, Cloud Run administration for deployment, and runtime service-account usage.
 - GitHub repository secrets still need to store the provider resource name and deployment service-account email.
+- Terraform can bootstrap WIF and service accounts before any application image exists.

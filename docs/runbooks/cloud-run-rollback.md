@@ -42,3 +42,4 @@ Open:
 - Open a fix branch.
 - Do not re-run deployment until validation passes.
 - Keep the immutable image tag for audit history.
+- If the service was newly created by the failed deployment, verify public access, runtime service account and `/health` again before routing traffic.
