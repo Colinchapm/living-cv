@@ -10,7 +10,10 @@ export function Skills() {
         description="Cloud, DevOps, platform engineering, software engineering, and quality skills represented in Colin Chapman's portfolio foundation."
       />
       <PageHeader title="Skills" eyebrow="Capabilities">
-        <p>Skills are grouped by the technologies and practices represented in this repository.</p>
+        <p>
+          Skills are grouped by practical platform, delivery, development, operations and professional
+          strengths. No unsupported ratings or percentage bars are used.
+        </p>
       </PageHeader>
       <section className="mx-auto grid max-w-6xl gap-5 px-4 py-10 sm:px-6 md:grid-cols-2 lg:px-8">
         {skillGroups.map((group) => (

@@ -1,0 +1,20 @@
+Colin Chapman
+Cloud and Platform Engineer
+North Tyneside / Newcastle upon Tyne, United Kingdom
+
+This downloadable CV placeholder is intentionally brief until Colin provides the final public CV document.
+
+Professional focus:
+- AWS, Azure and Google Cloud Platform
+- DevOps, CI/CD and platform support
+- Python, Linux, SQL and technical documentation
+- Incident troubleshooting, systems administration and cloud infrastructure
+
+Verified details currently represented on the Living CV site:
+- Platform Support Engineer, DXC Technology, March 2022 to March 2023
+- Founder and Independent Developer, Chapmans Logistics and Intelligent Technical Systems Ltd, January 2023 to present
+- Foundation Degree in Computing, Northumbria University, 2010
+- AWS Certified Cloud Practitioner, valid through 2027
+- City & Guilds NVQ Level 2 in Plastering, 2021
+
+Replace this file with Colin's final reviewed CV before public release.

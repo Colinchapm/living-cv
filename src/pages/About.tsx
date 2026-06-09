@@ -11,19 +11,13 @@ export function About() {
         description="About Colin Chapman's Living CV and evidence-led approach to cloud and platform engineering portfolio work."
       />
       <PageHeader title="About" eyebrow="Professional profile">
-        <p>{profile.summary}</p>
+        <p>{profile.introduction}</p>
       </PageHeader>
-      <Section title="How this CV is maintained">
+      <Section title="Biography">
         <div className="max-w-3xl space-y-4 leading-7 text-slate-700">
-          <p>
-            This site is structured as a Living CV. It is intended to be updated as projects mature,
-            deployments are made, and evidence becomes available through commits, documentation, tests,
-            and operational notes.
-          </p>
-          <p>
-            Employment history, education, certifications, results, and claims should only be added
-            when Colin has verified the details and can present them accurately.
-          </p>
+          {profile.biography.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </Section>
     </>

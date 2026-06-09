@@ -1,17 +1,30 @@
 # Colin Chapman Living CV
 
-A professional Living CV and cloud-engineering portfolio foundation for Colin Chapman.
+A professional Living CV and cloud-engineering portfolio for Colin Chapman, a Cloud and Platform Engineer based in North Tyneside / Newcastle upon Tyne, United Kingdom.
 
-The project is intentionally evidence-led. It avoids invented employment, qualifications, testimonials, customer claims, and statistics. CV and portfolio content lives in structured TypeScript data files under `src/data`.
+The project is evidence-led. It presents experience, education, skills and portfolio projects truthfully, distinguishes employment from independent development and prototypes, and avoids invented customers, production usage, metrics, testimonials or qualifications.
 
-## Stack
+## Technology Stack
 
-- React, TypeScript, Vite, React Router, Tailwind CSS
-- Vitest, React Testing Library, Playwright
+- React, TypeScript, Vite and React Router
+- Tailwind CSS
+- Vitest, React Testing Library and Playwright
 - ESLint and Prettier
 - Docker multi-stage build with nginx
-- Terraform for Google Cloud Artifact Registry, Cloud Run, IAM, APIs, and Workload Identity Federation
-- GitHub Actions for validation and prepared Cloud Run deployment
+- Terraform for Google Cloud infrastructure
+- GitHub Actions checks and a prepared Workload Identity Federation deployment workflow
+
+## Project Purpose
+
+The site is a living technical CV containing:
+
+- Professional CV content
+- Technical project case studies
+- Architecture documentation
+- Automated tests
+- CI/CD configuration
+- Docker and Cloud Run runtime preparation
+- Terraform deployment documentation
 
 ## Local Development
 
@@ -20,7 +33,7 @@ npm install
 npm run dev
 ```
 
-## Validation
+## Testing
 
 ```bash
 npm run lint
@@ -30,22 +43,56 @@ npm run build
 npm run playwright
 ```
 
-## Docker
+## Docker Execution
 
 ```bash
 docker build -t living-cv .
 docker run --rm -p 8080:8080 -e PORT=8080 living-cv
 ```
 
-The container serves the Vite `dist` directory through nginx, includes SPA fallback to `index.html`, and exposes `/health`.
+The container serves the Vite `dist` directory through nginx, includes SPA fallback to `index.html`, listens on the Cloud Run `PORT` value with a default of `8080`, and exposes `/health`.
 
-## Deployment
+## Deployment Overview
 
-Deployment is prepared but should not be run until Google Cloud project values, GitHub repository variables, and Terraform state are configured. See `docs/deployment/gcp.md`.
+Deployment is prepared but should not be run until Google Cloud project values, GitHub repository variables, Terraform state and Workload Identity Federation outputs are configured.
 
-## Documentation
+The deployment workflow uses GitHub OIDC through Google Workload Identity Federation. Do not create or download a service-account JSON key.
 
-- `docs/architecture/overview.md`
-- `docs/deployment/gcp.md`
-- `docs/decisions/0001-use-cloud-run.md`
-- `SECURITY.md`
+See `docs/deployment/gcp.md`.
+
+## Repository Structure
+
+- `src/data`: editable CV, skills, experience, education and project content
+- `src/pages`: route-level React pages
+- `src/components`: reusable layout, project and case-study components
+- `tests/e2e`: Playwright smoke tests
+- `docs/projects`: project architecture documentation with Mermaid diagrams
+- `docs/decisions`: architecture decision records
+- `terraform`: Google Cloud infrastructure definitions
+- `.github/workflows`: validation and prepared deployment workflows
+- `nginx`: Cloud Run-compatible nginx configuration
+- `public`: static downloadable CV placeholder
+
+## Content Editing
+
+Most editable content should be updated in structured TypeScript data files:
+
+- `src/data/profile.ts`
+- `src/data/skills.ts`
+- `src/data/experience.ts`
+- `src/data/education.ts`
+- `src/data/portfolio.ts`
+
+Keep project maturity labels accurate. Use terms such as prototype, concept, demonstration or planned system unless production use has been verified.
+
+Update `public/colin-chapman-cv.txt` when Colin has a final reviewed public CV file.
+
+## Current Implementation Status
+
+- Living CV pages are implemented.
+- Three portfolio project cards are implemented.
+- Three technical case-study routes are implemented.
+- Project architecture docs are implemented.
+- Contact form validates locally but is not connected to a backend.
+- GitHub and LinkedIn URLs are placeholders.
+- Cloud Run deployment is prepared but not yet deployed.

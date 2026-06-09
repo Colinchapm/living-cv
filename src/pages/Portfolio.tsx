@@ -12,8 +12,9 @@ export function Portfolio() {
       />
       <PageHeader title="Portfolio" eyebrow="Project evidence">
         <p>
-          These portfolio entries are framed as project foundations and concepts until source code,
-          deployment history, and documentation are added for each project.
+          These entries distinguish prototypes, demonstrations and concepts from production systems.
+          They are designed to show requirements, architecture, delivery thinking and safe technical
+          evidence without invented customer or usage claims.
         </p>
       </PageHeader>
       <section className="mx-auto max-w-6xl space-y-5 px-4 py-10 sm:px-6 lg:px-8">
