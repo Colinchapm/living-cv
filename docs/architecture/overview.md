@@ -6,7 +6,7 @@ This repository provides a static React Living CV deployed as a containerized ng
 flowchart LR
   Developer["Developer workstation"] --> GitHub["GitHub repository"]
   GitHub --> Checks["GitHub Actions checks"]
-  GitHub --> Deploy["Manual deployment workflow"]
+  GitHub --> Deploy["Main branch deployment workflow"]
   Deploy --> WIF["Google Workload Identity Federation"]
   WIF --> DeployerSA["Deployment service account"]
   DeployerSA --> ArtifactRegistry["Artifact Registry"]
@@ -36,4 +36,4 @@ Terraform declares required Google Cloud APIs, Artifact Registry, Cloud Run, run
 
 ## Delivery
 
-Pull requests run install, lint, type-check, unit tests, and production build. Deployment is prepared as a manual GitHub Actions workflow and does not use service-account JSON keys.
+Pull requests run install, lint, type-check, unit tests, Playwright smoke tests, and production build. Pushes to `main` can deploy immutable commit-SHA images to Cloud Run through GitHub Actions and Workload Identity Federation without service-account JSON keys.

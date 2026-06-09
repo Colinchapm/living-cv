@@ -68,7 +68,7 @@ See `docs/deployment/gcp.md`.
 - `tests/e2e`: Playwright smoke tests
 - `docs/projects`: project architecture documentation with Mermaid diagrams
 - `docs/decisions`: architecture decision records
-- `terraform`: Google Cloud infrastructure definitions
+- `infrastructure/terraform`: Google Cloud infrastructure definitions
 - `.github/workflows`: validation and prepared deployment workflows
 - `nginx`: Cloud Run-compatible nginx configuration
 - `public`: static downloadable CV placeholder

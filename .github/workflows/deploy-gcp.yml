@@ -1,0 +1,120 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: cloud-run-production
+  cancel-in-progress: false
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  ARTIFACT_REGISTRY: ${{ vars.GCP_ARTIFACT_REGISTRY }}
+  CLOUD_RUN_SERVICE: ${{ vars.GCP_CLOUD_RUN_SERVICE }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  deploy:
+    name: Build, push, and deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run type-check
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: Validate deployment configuration
+        run: |
+          test -n "${PROJECT_ID}"
+          test -n "${REGION}"
+          test -n "${ARTIFACT_REGISTRY}"
+          test -n "${CLOUD_RUN_SERVICE}"
+          test -n "${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}"
+          test -n "${{ secrets.GCP_SERVICE_ACCOUNT }}"
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+
+      - name: Build image
+        run: |
+          IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${CLOUD_RUN_SERVICE}:${IMAGE_TAG}"
+          docker build --tag "${IMAGE_URI}" .
+          echo "IMAGE_URI=${IMAGE_URI}" >> "${GITHUB_ENV}"
+
+      - name: Push image
+        run: docker push "${IMAGE_URI}"
+
+      - name: Deploy Cloud Run revision
+        run: |
+          gcloud run deploy "${CLOUD_RUN_SERVICE}" \
+            --image "${IMAGE_URI}" \
+            --region "${REGION}" \
+            --platform managed \
+            --port 8080 \
+            --min-instances 0 \
+            --max-instances 3 \
+            --quiet
+
+      - name: Capture deployment outputs
+        run: |
+          SERVICE_URL="$(gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --format 'value(status.url)')"
+          REVISION="$(gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --format 'value(status.latestReadyRevisionName)')"
+
+          {
+            echo "SERVICE_URL=${SERVICE_URL}"
+            echo "REVISION=${REVISION}"
+          } >> "${GITHUB_ENV}"
+
+      - name: Write deployment summary
+        run: |
+          {
+            echo "## Cloud Run deployment"
+            echo ""
+            echo "- Service: ${CLOUD_RUN_SERVICE}"
+            echo "- Region: ${REGION}"
+            echo "- Image: ${IMAGE_URI}"
+            echo "- Revision: ${REVISION}"
+            echo "- Service URL: ${SERVICE_URL}"
+            echo "- Health check: ${SERVICE_URL}/health"
+          } >> "${GITHUB_STEP_SUMMARY}"
