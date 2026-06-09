@@ -1,0 +1,6 @@
+project_id             = "your-gcp-project-id"
+region                 = "europe-west2"
+artifact_repository_id = "living-cv"
+service_name           = "living-cv"
+github_repository      = "your-github-org-or-user/living-cv"
+initial_image          = "europe-west2-docker.pkg.dev/your-gcp-project-id/living-cv/living-cv:bootstrap"
