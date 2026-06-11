@@ -12,6 +12,9 @@ These values are used in examples and can be changed through Terraform variables
 - Google Cloud region: `europe-west2`
 - Artifact Registry repository: `living-cv`
 - Cloud Run service: `living-cv`
+- Apex domain: `colinchapman.co.uk`
+- Canonical URL: `https://colinchapman.co.uk`
+- WWW hostname: `www.colinchapman.co.uk`
 
 ## Stage A: Infrastructure Bootstrap
 
@@ -217,9 +220,19 @@ Example plan:
 ```bash
 terraform -chdir=infrastructure/terraform plan \
   -var="project_id=YOUR_GCP_PROJECT_ID" \
-  -var="custom_domain=colinchapman.dev" \
+  -var="custom_domain=colinchapman.co.uk" \
+  -var="www_domain=www.colinchapman.co.uk" \
   -var="enable_custom_domain=true" \
   -var="redirect_www_to_apex=true"
+```
+
+Default custom-domain variables:
+
+```hcl
+enable_custom_domain = false
+custom_domain        = "colinchapman.co.uk"
+www_domain           = "www.colinchapman.co.uk"
+redirect_www_to_apex = true
 ```
 
 When applied, Terraform creates:
@@ -228,24 +241,24 @@ When applied, Terraform creates:
 - a global external HTTPS load balancer
 - a regional serverless network endpoint group pointing at Cloud Run
 - a Google-managed SSL certificate for the apex and `www` hosts
-- HTTP-to-HTTPS redirect
-- canonical redirect between apex and `www`
+- permanent HTTP-to-HTTPS redirect
+- permanent redirect from `www.colinchapman.co.uk` to `colinchapman.co.uk`
 
 ### Domain Launch Steps
 
 1. Purchase or confirm control of the domain.
-2. Choose the canonical host, for example `colinchapman.dev`.
+2. Choose the canonical host, `colinchapman.co.uk`.
 3. Apply Terraform with `enable_custom_domain=true`.
 4. Retrieve `custom_domain_global_ip_address` from Terraform output.
-5. Add DNS `A` records for the apex domain pointing to the global IP address.
-6. Add a DNS record for `www`. For the load balancer approach, use an `A` record pointing to the same global IP address unless the DNS provider requires a different pattern.
+5. Add a DNS `A` record for `@` pointing to the global IP address.
+6. Add a DNS `A` record for `www` pointing to the same global IP address.
 7. Wait for DNS propagation and for the Google-managed certificate to become active.
-8. Verify `https://colinchapman.dev/health`.
-9. Verify SPA fallback routes such as `https://colinchapman.dev/projects/serviceflow-construction`.
-10. Set `VITE_SITE_URL=https://colinchapman.dev` for production builds if the chosen domain differs from the repository default.
+8. Verify `https://colinchapman.co.uk/health`.
+9. Verify SPA fallback routes such as `https://colinchapman.co.uk/projects/serviceflow-construction`.
+10. Set `VITE_SITE_URL=https://colinchapman.co.uk` for production builds if the chosen domain differs from the repository default.
 11. Run `npm run generate:seo` or `npm run build` so sitemap and canonical URLs use the chosen domain.
 12. Add the property in Google Search Console.
-13. Submit `https://colinchapman.dev/sitemap.xml`.
+13. Submit `https://colinchapman.co.uk/sitemap.xml`.
 14. Request indexing for the home page and the key project case-study pages.
 
 Do not use a downloadable service-account JSON key for any deployment step.

@@ -34,13 +34,24 @@ variable "enable_custom_domain" {
 }
 
 variable "custom_domain" {
-  description = "Apex custom domain for the Living CV, for example colinchapman.dev."
+  description = "Apex custom domain for the Living CV."
   type        = string
-  default     = ""
+  default     = "colinchapman.co.uk"
 
   validation {
     condition     = var.custom_domain == "" || can(regex("^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$", var.custom_domain))
-    error_message = "custom_domain must be empty or an apex host such as colinchapman.dev."
+    error_message = "custom_domain must be empty or an apex host such as colinchapman.co.uk."
+  }
+}
+
+variable "www_domain" {
+  description = "WWW hostname for the Living CV custom domain."
+  type        = string
+  default     = "www.colinchapman.co.uk"
+
+  validation {
+    condition     = var.www_domain == "" || can(regex("^www\\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$", var.www_domain))
+    error_message = "www_domain must be empty or a www host such as www.colinchapman.co.uk."
   }
 }
 

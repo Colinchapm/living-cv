@@ -68,10 +68,13 @@ SEO routes and descriptions are maintained in `src/data/routes.json`. The build 
 
 Set `VITE_SITE_URL` before production builds if the final domain differs from the default configured in `src/data/site.ts`.
 
+The confirmed canonical production URL is `https://colinchapman.co.uk`. The `www` hostname should permanently redirect to the apex domain, and SEO metadata must not use the Cloud Run service hostname.
+
 See:
 
 - `docs/seo/technical-seo.md`
 - `docs/seo/search-console.md`
+- `docs/seo/bing-webmaster-tools.md`
 - `docs/seo/domain-launch-checklist.md`
 
 ## Repository Structure

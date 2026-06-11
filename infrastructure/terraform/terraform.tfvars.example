@@ -1,0 +1,12 @@
+project_id = "YOUR_GCP_PROJECT_ID"
+region     = "europe-west2"
+
+artifact_registry_repository = "living-cv"
+cloud_run_service            = "living-cv"
+
+github_repository = "Colinchapm/living-cv"
+
+enable_custom_domain = false
+custom_domain        = "colinchapman.co.uk"
+www_domain           = "www.colinchapman.co.uk"
+redirect_www_to_apex = true
