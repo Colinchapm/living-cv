@@ -7,8 +7,9 @@ export function Education() {
   return (
     <>
       <Meta
-        title="Education"
-        description="Education and certification section for Colin Chapman's Living CV, reserved for verified details."
+        title="Education and Certifications"
+        description="Education and certifications for Colin Chapman, including Northumbria University computing study, AWS Certified Cloud Practitioner and technical refresher training."
+        canonicalPath="/education"
       />
       <PageHeader title="Education" eyebrow="Verified details">
         <p>Education, certification and refresher training details supplied for this Living CV.</p>
@@ -16,11 +17,11 @@ export function Education() {
       <Section title="Qualifications and training">
         <div className="grid gap-5 md:grid-cols-2">
           {educationEntries.map((entry) => (
-            <article key={entry.title} className="rounded-lg border border-slate-200 bg-white p-6">
+            <article key={entry.title} className="surface-card p-6">
               <p className="text-sm font-medium text-clay">{entry.period}</p>
-              <h2 className="mt-2 text-xl font-semibold text-ink">{entry.title}</h2>
-              <p className="mt-1 text-slate-600">{entry.provider}</p>
-              <p className="mt-4 leading-7 text-slate-700">{entry.description}</p>
+              <h2 className="mt-2 text-xl font-semibold text-white">{entry.title}</h2>
+              <p className="mt-1 text-slate-300">{entry.provider}</p>
+              <p className="mt-4 leading-7 text-slate-300">{entry.description}</p>
             </article>
           ))}
         </div>

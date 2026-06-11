@@ -12,7 +12,9 @@ flowchart LR
   DeployerSA --> ArtifactRegistry["Artifact Registry"]
   DeployerSA --> CloudRun["Cloud Run service created or updated by Actions"]
   CloudRun --> RuntimeSA["Runtime service account"]
-  Visitor["Employer or reviewer"] --> CloudRun
+  Visitor["Employer or reviewer"] --> HTTPSLB["Optional global HTTPS load balancer and managed certificate"]
+  HTTPSLB --> CloudRun
+  Visitor --> CloudRun
   CloudRun --> Health["/health endpoint"]
 ```
 
@@ -34,6 +36,12 @@ The production container uses a multi-stage Docker build:
 
 Terraform declares required Google Cloud APIs, Artifact Registry, runtime and deployment service accounts, IAM bindings, and GitHub Workload Identity Federation. Cloud Run service creation is intentionally performed by GitHub Actions after the first application image is pushed.
 
+Terraform can also provision an optional global external HTTPS load balancer for a custom domain. That path creates a static global IP address, serverless network endpoint group, managed SSL certificate, HTTP-to-HTTPS redirect and canonical host redirect. It is disabled by default so the deployment can be reviewed before any public domain is attached.
+
 ## Delivery
 
 Pull requests run install, lint, type-check, unit tests, Playwright smoke tests, and production build. Pushes to `main` can deploy immutable commit-SHA images to Cloud Run through GitHub Actions and Workload Identity Federation without service-account JSON keys. The deployment workflow creates the Cloud Run service on the first deployment and updates it on later deployments.
+
+## Search And Metadata
+
+Static metadata is generated from `src/data/routes.json` and `src/data/site.ts`. The build creates `robots.txt`, `sitemap.xml`, web app manifest and Open Graph artwork under `public`. Page components use structured data helpers for Person, WebSite, ProfilePage, SoftwareApplication and BreadcrumbList JSON-LD.

@@ -1,6 +1,7 @@
 export const profile = {
   name: 'Colin Chapman',
   role: 'Cloud and Platform Engineer',
+  displayRole: 'Cloud & Platform Engineer',
   supportingLine: 'AWS | Azure | Google Cloud | DevOps | Platform Support',
   location: 'North Tyneside / Newcastle upon Tyne, United Kingdom',
   email: 'colinchapm@googlemail.com',
@@ -9,6 +10,8 @@ export const profile = {
   cvDownloadPath: '/colin-chapman-cv.txt',
   summary:
     'A living technical CV containing deployed demonstrations, architecture documentation and source-code evidence for cloud engineering, platform support, DevOps and infrastructure operations.',
+  heroStatement:
+    'I design, build and document practical cloud systems across AWS, Microsoft Azure and Google Cloud.',
   introduction:
     'Colin Chapman is a Cloud and Platform Engineer with experience across AWS, Microsoft Azure, Google Cloud Platform, Python, Linux, SQL, CI/CD, cloud infrastructure, platform support, incident troubleshooting and technical documentation.',
   biography: [
@@ -20,13 +23,13 @@ export const profile = {
     'He is seeking a stable long-term role in cloud engineering, platform support, DevOps, technical support or infrastructure operations.',
   ],
   principles: [
-    'Source code',
-    'Architecture',
-    'CI/CD',
-    'Security',
-    'Testing',
-    'Cloud deployment',
-    'Documentation',
+    'Deployed on Google Cloud Run',
+    'Automated with GitHub Actions',
+    'Infrastructure managed with Terraform',
+    'Secure deployment using Workload Identity Federation',
+    'Tested with Vitest and Playwright',
+    'Architecture and operational runbooks',
+    'Public GitHub source code',
   ],
   compactStack: [
     'AWS',
@@ -39,5 +42,13 @@ export const profile = {
     'Docker',
     'GitHub Actions',
     'Terraform concepts',
+  ],
+  howColinWorks: [
+    'Requirements are broken into manageable tasks.',
+    'Architecture decisions are documented.',
+    'Changes are tested before deployment.',
+    'Automation is preferred over repetitive manual steps.',
+    'AI is used as an engineering productivity and accessibility tool.',
+    'Generated work is reviewed, tested and validated.',
   ],
 } as const;

@@ -8,7 +8,8 @@ export function Experience() {
     <>
       <Meta
         title="Experience"
-        description="Experience entries for Colin Chapman's Living CV, limited to verified and portfolio-supported information."
+        description="Experience for Colin Chapman, including platform support engineer work, independent cloud development, technical support and construction workflow knowledge."
+        canonicalPath="/experience"
       />
       <PageHeader title="Experience" eyebrow="Verified record">
         <p>
@@ -19,14 +20,14 @@ export function Experience() {
       <Section title="Experience history">
         <div className="space-y-5">
           {experienceEntries.map((entry) => (
-            <article key={entry.title} className="rounded-lg border border-slate-200 bg-white p-6">
+            <article key={entry.title} className="surface-card p-6">
               <p className="text-sm font-medium text-clay">{entry.period}</p>
-              <h2 className="mt-2 text-xl font-semibold text-ink">{entry.title}</h2>
-              <p className="mt-1 text-slate-600">{entry.organisation}</p>
-              <p className="mt-4 leading-7 text-slate-700">{entry.description}</p>
+              <h2 className="mt-2 text-xl font-semibold text-white">{entry.title}</h2>
+              <p className="mt-1 text-slate-300">{entry.organisation}</p>
+              <p className="mt-4 leading-7 text-slate-300">{entry.description}</p>
               <ul className="mt-5 grid gap-2">
                 {entry.evidence.map((item) => (
-                  <li key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
+                  <li key={item} className="rounded border border-sky-300/20 bg-slate-950 px-3 py-2 text-sm text-slate-200">
                     {item}
                   </li>
                 ))}

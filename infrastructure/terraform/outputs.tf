@@ -55,3 +55,13 @@ output "github_repository_secret_identifiers" {
     GCP_SERVICE_ACCOUNT            = "deployment_service_account"
   }
 }
+
+output "custom_domain_global_ip_address" {
+  description = "Static global IP address for custom-domain DNS A records when enabled."
+  value       = var.enable_custom_domain ? google_compute_global_address.custom_domain[0].address : null
+}
+
+output "custom_domain_canonical_host" {
+  description = "Canonical custom-domain host when custom-domain infrastructure is enabled."
+  value       = var.enable_custom_domain ? (var.redirect_www_to_apex ? var.custom_domain : "www.${var.custom_domain}") : null
+}

@@ -58,7 +58,21 @@ Deployment is prepared but should not be run until Google Cloud project values, 
 
 The deployment design is two-stage: Terraform bootstraps APIs, Artifact Registry, service accounts, IAM and Workload Identity Federation; GitHub Actions then builds the first application image and creates or updates Cloud Run from `main`. Do not create or download a service-account JSON key.
 
+Custom-domain support is available through optional Terraform for a global HTTPS load balancer, managed certificate, static IP address and canonical host redirect. It is disabled by default until the production domain is confirmed.
+
 See `docs/deployment/gcp.md`.
+
+## Search And Social Metadata
+
+SEO routes and descriptions are maintained in `src/data/routes.json`. The build runs `npm run generate:seo`, which generates `robots.txt`, `sitemap.xml`, a web manifest, icon and Open Graph artwork under `public`.
+
+Set `VITE_SITE_URL` before production builds if the final domain differs from the default configured in `src/data/site.ts`.
+
+See:
+
+- `docs/seo/technical-seo.md`
+- `docs/seo/search-console.md`
+- `docs/seo/domain-launch-checklist.md`
 
 ## Repository Structure
 
@@ -67,6 +81,7 @@ See `docs/deployment/gcp.md`.
 - `src/components`: reusable layout, project and case-study components
 - `tests/e2e`: Playwright smoke tests
 - `docs/projects`: project architecture documentation with Mermaid diagrams
+- `docs/seo`: technical SEO and domain launch documentation
 - `docs/decisions`: architecture decision records
 - `infrastructure/terraform`: Google Cloud infrastructure definitions
 - `.github/workflows`: validation and prepared deployment workflows
@@ -82,6 +97,8 @@ Most editable content should be updated in structured TypeScript data files:
 - `src/data/experience.ts`
 - `src/data/education.ts`
 - `src/data/portfolio.ts`
+- `src/data/routes.json`
+- `src/data/site.ts`
 
 Keep project maturity labels accurate. Use terms such as prototype, concept, demonstration or planned system unless production use has been verified.
 
@@ -96,3 +113,5 @@ Update `public/colin-chapman-cv.txt` when Colin has a final reviewed public CV f
 - Contact form validates locally but is not connected to a backend.
 - GitHub URL is configured and LinkedIn remains an optional placeholder.
 - Cloud Run deployment is prepared with a two-stage bootstrap flow but not yet deployed.
+- Custom-domain infrastructure is documented and optional.
+- Search metadata, sitemap, robots file, JSON-LD and Open Graph artwork are generated from reviewed data.

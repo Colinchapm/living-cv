@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/",
+    "title": "Colin Chapman Cloud Engineer",
+    "description": "Colin Chapman is a Cloud & Platform Engineer in North Tyneside and Newcastle upon Tyne, showing a DevOps portfolio with Cloud Run, Terraform, GitHub Actions, AWS, Azure and Google Cloud evidence."
+  },
+  {
+    "path": "/about",
+    "title": "About Colin Chapman",
+    "description": "Professional profile for Colin Chapman, a Platform Engineer and North Tyneside technology professional with AWS, Azure, Google Cloud, Python, Linux, SQL and platform support experience."
+  },
+  {
+    "path": "/skills",
+    "title": "Cloud and DevOps Skills",
+    "description": "Cloud, DevOps, platform support and systems skills across AWS, Microsoft Azure, Google Cloud, CI/CD, Terraform, Docker, Python, Linux and SQL."
+  },
+  {
+    "path": "/experience",
+    "title": "Experience",
+    "description": "Experience for Colin Chapman, including platform support engineer work, independent cloud development, technical support and construction workflow knowledge."
+  },
+  {
+    "path": "/education",
+    "title": "Education and Certifications",
+    "description": "Education and certifications for Colin Chapman, including Northumbria University computing study, AWS Certified Cloud Practitioner and technical refresher training."
+  },
+  {
+    "path": "/portfolio",
+    "title": "Cloud Engineering Portfolio",
+    "description": "DevOps portfolio and technical project evidence for ServiceFlow Construction, InkMatch Studio and Pegasus Engineering Platform."
+  },
+  {
+    "path": "/contact",
+    "title": "Contact Colin Chapman",
+    "description": "Contact Colin Chapman for cloud engineering, platform support, DevOps, technical support and infrastructure operations opportunities in North East England."
+  },
+  {
+    "path": "/projects/serviceflow-construction",
+    "title": "ServiceFlow Construction Case Study",
+    "description": "ServiceFlow Construction is a design and prototype case study for a field-service and property-maintenance platform using AWS architecture thinking."
+  },
+  {
+    "path": "/projects/inkmatch-studio",
+    "title": "InkMatch Studio Case Study",
+    "description": "InkMatch Studio is a design and prototype case study for a tattoo-industry marketplace and studio workflow platform using Microsoft Azure architecture thinking."
+  },
+  {
+    "path": "/projects/pegasus-engineering-platform",
+    "title": "Pegasus Engineering Platform Case Study",
+    "description": "Pegasus Engineering Platform is a secure engineering and manufacturing platform concept using Google Cloud Platform, Cloud Run, Terraform and GitHub Actions thinking."
+  }
+]

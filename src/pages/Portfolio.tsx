@@ -7,8 +7,9 @@ export function Portfolio() {
   return (
     <>
       <Meta
-        title="Portfolio"
-        description="Portfolio projects for Colin Chapman, including ServiceFlow Construction, InkMatch Studio, and Pegasus ALSSC Engineering Platform."
+        title="Cloud Engineering Portfolio"
+        description="DevOps portfolio and technical project evidence for ServiceFlow Construction, InkMatch Studio and Pegasus Engineering Platform."
+        canonicalPath="/portfolio"
       />
       <PageHeader title="Portfolio" eyebrow="Project evidence">
         <p>
