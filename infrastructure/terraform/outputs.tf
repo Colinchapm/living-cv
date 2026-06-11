@@ -63,5 +63,5 @@ output "custom_domain_global_ip_address" {
 
 output "custom_domain_canonical_host" {
   description = "Canonical custom-domain host when custom-domain infrastructure is enabled."
-  value       = var.enable_custom_domain ? (var.redirect_www_to_apex ? var.custom_domain : "www.${var.custom_domain}") : null
+  value       = var.enable_custom_domain ? (var.redirect_www_to_apex ? var.custom_domain : var.www_domain) : null
 }

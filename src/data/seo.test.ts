@@ -21,6 +21,7 @@ describe('SEO configuration', () => {
   it('does not use placeholder contact or production-domain values', () => {
     expect(siteConfig.email).not.toBe('contact@example.com');
     expect(siteConfig.productionUrl).not.toMatch(/example|localhost|placeholder/i);
+    expect(siteConfig.productionUrl).toBe('https://colinchapman.co.uk');
     expect(siteConfig.location).not.toMatch(/\d+\s+\w+\s+(street|road|avenue|lane|drive)/i);
   });
 
@@ -44,6 +45,8 @@ describe('SEO configuration', () => {
 
     expect(robots).toContain('Allow: /');
     expect(robots).toContain(`${siteConfig.productionUrl}/sitemap.xml`);
+    expect(robots).not.toMatch(/colinchapman[.]dev/);
+    expect(sitemap).not.toMatch(/colinchapman[.]dev/);
 
     for (const route of siteRoutes) {
       expect(sitemap).toContain(`${siteConfig.productionUrl}${route.path}`);
