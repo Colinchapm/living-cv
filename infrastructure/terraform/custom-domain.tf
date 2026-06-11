@@ -1,7 +1,7 @@
 locals {
-  custom_domain_enabled = var.enable_custom_domain && var.custom_domain != ""
+  custom_domain_enabled = var.enable_custom_domain && var.custom_domain != "" && var.www_domain != ""
   apex_domain           = var.custom_domain
-  www_domain            = var.custom_domain == "" ? "" : "www.${var.custom_domain}"
+  www_domain            = var.www_domain
   canonical_domain      = var.redirect_www_to_apex ? local.apex_domain : local.www_domain
   redirect_domain       = var.redirect_www_to_apex ? local.www_domain : local.apex_domain
   certificate_domains   = local.custom_domain_enabled ? [local.apex_domain, local.www_domain] : []

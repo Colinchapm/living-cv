@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://colinchapman.dev/</loc>
+    <loc>https://colinchapman.co.uk/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/about</loc>
+    <loc>https://colinchapman.co.uk/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/skills</loc>
+    <loc>https://colinchapman.co.uk/skills</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/experience</loc>
+    <loc>https://colinchapman.co.uk/experience</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/education</loc>
+    <loc>https://colinchapman.co.uk/education</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/portfolio</loc>
+    <loc>https://colinchapman.co.uk/portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/contact</loc>
+    <loc>https://colinchapman.co.uk/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/projects/serviceflow-construction</loc>
+    <loc>https://colinchapman.co.uk/projects/serviceflow-construction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/projects/inkmatch-studio</loc>
+    <loc>https://colinchapman.co.uk/projects/inkmatch-studio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://colinchapman.dev/projects/pegasus-engineering-platform</loc>
+    <loc>https://colinchapman.co.uk/projects/pegasus-engineering-platform</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

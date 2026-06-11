@@ -3,7 +3,7 @@ export const siteConfig = {
   personName: 'Colin Chapman',
   professionalTitle: 'Cloud & Platform Engineer',
   canonicalTitle: 'Cloud and Platform Engineer',
-  productionUrl: import.meta.env.VITE_SITE_URL ?? 'https://colinchapman.dev',
+  productionUrl: import.meta.env.VITE_SITE_URL ?? 'https://colinchapman.co.uk',
   email: 'colinchapm@googlemail.com',
   githubUrl: 'https://github.com/Colinchapm',
   linkedinUrl: 'https://www.linkedin.com/in/colin-chapman-placeholder',

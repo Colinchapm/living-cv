@@ -7,10 +7,16 @@ The Living CV uses structured content and generated static assets so search meta
 The default production URL is configured in `src/data/site.ts` and can be overridden at build time with:
 
 ```bash
-VITE_SITE_URL=https://colinchapman.dev npm run build
+VITE_SITE_URL=https://colinchapman.co.uk npm run build
 ```
 
 Use the confirmed production domain before launch. Do not leave localhost, example domains or temporary Cloud Run URLs in production metadata.
+
+Confirmed production values:
+
+- Apex domain: `colinchapman.co.uk`
+- Canonical URL: `https://colinchapman.co.uk`
+- WWW hostname: `www.colinchapman.co.uk`
 
 ## Generated Assets
 
@@ -43,6 +49,8 @@ Structured data helpers live in `src/data/structuredData.ts`.
 ## Robots And Sitemap
 
 `robots.txt` allows public crawling and points crawlers to the sitemap. `sitemap.xml` includes all public Living CV and project case-study routes.
+
+Neither file should contain the Cloud Run service hostname. Canonical metadata, Open Graph URLs, Twitter/X image URLs and JSON-LD should use `https://colinchapman.co.uk`.
 
 ## Content Safety Checks
 
