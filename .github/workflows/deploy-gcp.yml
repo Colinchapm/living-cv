@@ -1,0 +1,156 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: cloud-run-production
+  cancel-in-progress: false
+
+env:
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  REGION: ${{ vars.GCP_REGION }}
+  ARTIFACT_REGISTRY: ${{ vars.GCP_ARTIFACT_REGISTRY }}
+  CLOUD_RUN_SERVICE: ${{ vars.GCP_CLOUD_RUN_SERVICE }}
+  CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT: ${{ vars.GCP_CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  deploy:
+    name: Build, push, and deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run type-check
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: Validate deployment configuration
+        run: |
+          test -n "${PROJECT_ID}"
+          test -n "${REGION}"
+          test -n "${ARTIFACT_REGISTRY}"
+          test -n "${CLOUD_RUN_SERVICE}"
+          test -n "${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}"
+          test -n "${{ secrets.GCP_SERVICE_ACCOUNT }}"
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+
+      - name: Resolve deployment settings
+        run: |
+          RUNTIME_SERVICE_ACCOUNT="${CLOUD_RUN_RUNTIME_SERVICE_ACCOUNT:-${CLOUD_RUN_SERVICE}-runtime@${PROJECT_ID}.iam.gserviceaccount.com}"
+          IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REGISTRY}/${CLOUD_RUN_SERVICE}:${IMAGE_TAG}"
+
+          if gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --platform managed \
+            > /dev/null 2>&1; then
+            DEPLOYMENT_MODE="update"
+          else
+            DEPLOYMENT_MODE="create"
+          fi
+
+          {
+            echo "RUNTIME_SERVICE_ACCOUNT=${RUNTIME_SERVICE_ACCOUNT}"
+            echo "IMAGE_URI=${IMAGE_URI}"
+            echo "DEPLOYMENT_MODE=${DEPLOYMENT_MODE}"
+          } >> "${GITHUB_ENV}"
+
+      - name: Build image
+        run: |
+          docker build --tag "${IMAGE_URI}" .
+
+      - name: Push image
+        run: docker push "${IMAGE_URI}"
+
+      - name: Deploy Cloud Run revision
+        run: |
+          gcloud run deploy "${CLOUD_RUN_SERVICE}" \
+            --image "${IMAGE_URI}" \
+            --region "${REGION}" \
+            --platform managed \
+            --allow-unauthenticated \
+            --service-account "${RUNTIME_SERVICE_ACCOUNT}" \
+            --port 8080 \
+            --min-instances 0 \
+            --max-instances 3 \
+            --quiet
+
+      - name: Capture deployment outputs
+        run: |
+          SERVICE_URL="$(gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --format 'value(status.url)')"
+          REVISION="$(gcloud run services describe "${CLOUD_RUN_SERVICE}" \
+            --region "${REGION}" \
+            --format 'value(status.latestReadyRevisionName)')"
+
+          {
+            echo "SERVICE_URL=${SERVICE_URL}"
+            echo "REVISION=${REVISION}"
+          } >> "${GITHUB_ENV}"
+
+      - name: Verify health endpoint
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if curl --fail --silent --show-error "${SERVICE_URL}/health"; then
+              exit 0
+            fi
+            echo "Health check attempt ${attempt} failed; retrying..."
+            sleep 10
+          done
+
+          echo "Cloud Run health check failed for ${SERVICE_URL}/health" >&2
+          exit 1
+
+      - name: Write deployment summary
+        run: |
+          {
+            echo "## Cloud Run deployment"
+            echo ""
+            echo "- Service: ${CLOUD_RUN_SERVICE}"
+            echo "- Region: ${REGION}"
+            echo "- Deployment mode: ${DEPLOYMENT_MODE}"
+            echo "- Image: ${IMAGE_URI}"
+            echo "- Revision: ${REVISION}"
+            echo "- Service URL: ${SERVICE_URL}"
+            echo "- Health check: ${SERVICE_URL}/health"
+          } >> "${GITHUB_STEP_SUMMARY}"

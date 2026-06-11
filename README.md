@@ -56,7 +56,7 @@ The container serves the Vite `dist` directory through nginx, includes SPA fallb
 
 Deployment is prepared but should not be run until Google Cloud project values, GitHub repository variables, Terraform state and Workload Identity Federation outputs are configured.
 
-The deployment workflow uses GitHub OIDC through Google Workload Identity Federation. Do not create or download a service-account JSON key.
+The deployment design is two-stage: Terraform bootstraps APIs, Artifact Registry, service accounts, IAM and Workload Identity Federation; GitHub Actions then builds the first application image and creates or updates Cloud Run from `main`. Do not create or download a service-account JSON key.
 
 See `docs/deployment/gcp.md`.
 
@@ -68,7 +68,7 @@ See `docs/deployment/gcp.md`.
 - `tests/e2e`: Playwright smoke tests
 - `docs/projects`: project architecture documentation with Mermaid diagrams
 - `docs/decisions`: architecture decision records
-- `terraform`: Google Cloud infrastructure definitions
+- `infrastructure/terraform`: Google Cloud infrastructure definitions
 - `.github/workflows`: validation and prepared deployment workflows
 - `nginx`: Cloud Run-compatible nginx configuration
 - `public`: static downloadable CV placeholder
@@ -95,4 +95,4 @@ Update `public/colin-chapman-cv.txt` when Colin has a final reviewed public CV f
 - Project architecture docs are implemented.
 - Contact form validates locally but is not connected to a backend.
 - GitHub URL is configured and LinkedIn remains an optional placeholder.
-- Cloud Run deployment is prepared but not yet deployed.
+- Cloud Run deployment is prepared with a two-stage bootstrap flow but not yet deployed.

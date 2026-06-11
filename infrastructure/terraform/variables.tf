@@ -9,13 +9,13 @@ variable "region" {
   default     = "europe-west2"
 }
 
-variable "artifact_repository_id" {
-  description = "Artifact Registry repository ID."
+variable "artifact_registry_repository" {
+  description = "Artifact Registry Docker repository name."
   type        = string
   default     = "living-cv"
 }
 
-variable "service_name" {
+variable "cloud_run_service" {
   description = "Cloud Run service name."
   type        = string
   default     = "living-cv"
@@ -24,9 +24,6 @@ variable "service_name" {
 variable "github_repository" {
   description = "GitHub repository allowed to deploy, in owner/repo format."
   type        = string
+  default     = "Colinchapm/living-cv"
 }
 
-variable "initial_image" {
-  description = "Initial container image for Cloud Run. Replace after the first image is pushed."
-  type        = string
-}
