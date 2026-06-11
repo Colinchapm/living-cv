@@ -27,3 +27,26 @@ variable "github_repository" {
   default     = "Colinchapm/living-cv"
 }
 
+variable "enable_custom_domain" {
+  description = "Whether to provision global external HTTPS load balancer resources for a custom domain."
+  type        = bool
+  default     = false
+}
+
+variable "custom_domain" {
+  description = "Apex custom domain for the Living CV, for example colinchapman.dev."
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.custom_domain == "" || can(regex("^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?(\\.[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?)+$", var.custom_domain))
+    error_message = "custom_domain must be empty or an apex host such as colinchapman.dev."
+  }
+}
+
+variable "redirect_www_to_apex" {
+  description = "When true, redirect www.custom_domain to the apex domain. When false, redirect apex to www.custom_domain."
+  type        = bool
+  default     = true
+}
+

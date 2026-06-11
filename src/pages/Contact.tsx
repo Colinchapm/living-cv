@@ -61,8 +61,9 @@ export function Contact() {
   return (
     <>
       <Meta
-        title="Contact"
-        description="Contact details for Colin Chapman's Living CV and cloud-engineering portfolio."
+        title="Contact Colin Chapman"
+        description="Contact Colin Chapman for cloud engineering, platform support, DevOps, technical support and infrastructure operations opportunities in North East England."
+        canonicalPath="/contact"
       />
       <PageHeader title="Contact" eyebrow="Get in touch">
         <p>
@@ -72,36 +73,32 @@ export function Contact() {
       </PageHeader>
       <Section title="Contact information">
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <address className="space-y-4 not-italic text-slate-700">
+          <address className="space-y-4 not-italic text-slate-300">
             <p>{profile.location}</p>
             <p>
-              <a className="font-semibold text-forest underline" href={`mailto:${profile.email}`}>
+              <a className="accent-link" href={`mailto:${profile.email}`}>
                 Email Colin Chapman
               </a>
             </p>
             <p>
-              <a className="font-semibold text-forest underline" href={profile.githubUrl}>
+              <a className="accent-link" href={profile.githubUrl}>
                 GitHub profile
               </a>
             </p>
             <p>
-              <a className="font-semibold text-forest underline" href={profile.linkedinUrl}>
+              <a className="accent-link" href={profile.linkedinUrl}>
                 LinkedIn profile placeholder
               </a>
             </p>
           </address>
-          <form
-            className="rounded-lg border border-slate-200 bg-white p-6"
-            onSubmit={handleSubmit}
-            noValidate
-          >
+          <form className="surface-card p-6" onSubmit={handleSubmit} noValidate>
             <div className="grid gap-5">
               <div>
-                <label className="block text-sm font-semibold text-ink" htmlFor="name">
+                <label className="block text-sm font-semibold text-white" htmlFor="name">
                   Name
                 </label>
                 <input
-                  className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+                  className="mt-2 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="name"
                   name="name"
                   type="text"
@@ -115,11 +112,11 @@ export function Contact() {
                 ) : null}
               </div>
               <div>
-                <label className="block text-sm font-semibold text-ink" htmlFor="email">
+                <label className="block text-sm font-semibold text-white" htmlFor="email">
                   Email
                 </label>
                 <input
-                  className="mt-2 w-full rounded border border-slate-300 px-3 py-2"
+                  className="mt-2 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="email"
                   name="email"
                   type="email"
@@ -138,17 +135,17 @@ export function Contact() {
                 {errors.website ? <p>{errors.website}</p> : null}
               </div>
               <div>
-                <label className="block text-sm font-semibold text-ink" htmlFor="message">
+                <label className="block text-sm font-semibold text-white" htmlFor="message">
                   Message
                 </label>
                 <textarea
-                  className="mt-2 min-h-40 w-full rounded border border-slate-300 px-3 py-2"
+                  className="mt-2 min-h-40 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="message"
                   name="message"
                   maxLength={maxMessageLength}
                   aria-describedby={errors.message ? 'message-error message-help' : 'message-help'}
                 />
-                <p className="mt-2 text-sm text-slate-600" id="message-help">
+                <p className="mt-2 text-sm text-slate-400" id="message-help">
                   Maximum {maxMessageLength} characters.
                 </p>
                 {errors.message ? (
@@ -157,14 +154,14 @@ export function Contact() {
                   </p>
                 ) : null}
               </div>
-              <button
-                className="w-fit rounded bg-forest px-5 py-3 text-sm font-semibold text-white hover:bg-teal-800"
-                type="submit"
-              >
+              <button className="w-fit primary-action" type="submit">
                 Validate message
               </button>
               {status ? (
-                <p className="rounded border border-teal-200 bg-teal-50 p-4 text-sm text-forest" role="status">
+                <p
+                  className="rounded border border-sky-300/30 bg-slate-950 p-4 text-sm text-sky-200"
+                  role="status"
+                >
                   {status}
                 </p>
               ) : null}

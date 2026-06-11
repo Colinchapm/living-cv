@@ -8,25 +8,19 @@ export function ArchitectureSummary({
   services: readonly string[];
 }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="text-2xl font-semibold text-ink">Proposed architecture</h2>
-      <p className="mt-3 text-slate-700">Primary reference architecture: {architecture}</p>
+    <section className="surface-card p-6">
+      <h2 className="text-2xl font-semibold text-white">Proposed architecture</h2>
+      <p className="mt-3 text-slate-300">Primary reference architecture: {architecture}</p>
       <TechnologyList items={services} label={`${architecture} services`} />
     </section>
   );
 }
 
-export function Requirements({
-  title,
-  items,
-}: {
-  title: string;
-  items: readonly string[];
-}) {
+export function Requirements({ title, items }: { title: string; items: readonly string[] }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="text-2xl font-semibold text-ink">{title}</h2>
-      <ul className="mt-4 space-y-3 text-slate-700">
+    <section className="surface-card p-6">
+      <h2 className="text-2xl font-semibold text-white">{title}</h2>
+      <ul className="mt-4 space-y-3 text-slate-300">
         {items.map((item) => (
           <li key={item} className="border-l-4 border-brass pl-4 leading-7">
             {item}
@@ -43,12 +37,12 @@ export function SecurityControls({ items }: { items: readonly string[] }) {
 
 export function ImplementationRoadmap({ items }: { items: readonly string[] }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="text-2xl font-semibold text-ink">Implementation roadmap</h2>
-      <ol className="mt-4 space-y-3 text-slate-700">
+    <section className="surface-card p-6">
+      <h2 className="text-2xl font-semibold text-white">Implementation roadmap</h2>
+      <ol className="mt-4 space-y-3 text-slate-300">
         {items.map((item, index) => (
           <li key={item} className="flex gap-3 leading-7">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-forest text-sm font-semibold text-white">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-sky-300 text-sm font-semibold text-slate-950">
               {index + 1}
             </span>
             <span>{item}</span>
@@ -61,17 +55,17 @@ export function ImplementationRoadmap({ items }: { items: readonly string[] }) {
 
 export function EvidenceLinks({ links }: { links: readonly EvidenceLink[] }) {
   return (
-    <section className="rounded-lg border border-slate-200 bg-white p-6">
-      <h2 className="text-2xl font-semibold text-ink">Evidence links</h2>
+    <section className="surface-card p-6">
+      <h2 className="text-2xl font-semibold text-white">Evidence links</h2>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
         {links.map((link) => (
           <li key={link.label}>
             <a
               href={link.href}
-              className="block rounded border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-ink hover:bg-white"
+              className="block rounded border border-sky-300/20 bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-100 hover:bg-slate-800"
             >
               {link.label}
-              <span className="ml-2 font-normal text-slate-600">
+              <span className="ml-2 font-normal text-slate-400">
                 {link.status === 'placeholder' ? '(placeholder)' : '(available)'}
               </span>
             </a>
@@ -86,7 +80,10 @@ export function TechnologyList({ items, label }: { items: readonly string[]; lab
   return (
     <ul className="mt-4 flex flex-wrap gap-2" aria-label={label}>
       {items.map((item) => (
-        <li key={item} className="rounded border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
+        <li
+          key={item}
+          className="rounded border border-sky-300/20 bg-slate-950 px-3 py-2 text-sm text-slate-200"
+        >
           {item}
         </li>
       ))}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Colin Chapman Cloud and Platform Engineer</title>
+  <desc id="desc">Open Graph preview for Colin Chapman's Living CV.</desc>
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <path d="M80 140h1040M80 490h1040" stroke="#1e293b" stroke-width="2"/>
+  <path d="M140 210h240M140 260h420M140 310h320" stroke="#38bdf8" stroke-width="14" stroke-linecap="round" opacity=".95"/>
+  <path d="M720 200h300v180H720z" fill="none" stroke="#38bdf8" stroke-width="6"/>
+  <path d="M760 250h220M760 300h140M760 350h180" stroke="#e2e8f0" stroke-width="8" stroke-linecap="round"/>
+  <text x="140" y="405" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">Colin Chapman</text>
+  <text x="140" y="462" fill="#bae6fd" font-family="Inter, Arial, sans-serif" font-size="34">Cloud &amp; Platform Engineer</text>
+  <text x="140" y="525" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="25">AWS · Azure · Google Cloud · Terraform · GitHub Actions</text>
+</svg>

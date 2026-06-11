@@ -5,6 +5,7 @@ import { Contact } from './pages/Contact';
 import { Education } from './pages/Education';
 import { Experience } from './pages/Experience';
 import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
 import { Portfolio } from './pages/Portfolio';
 import { ProjectCaseStudy } from './pages/ProjectCaseStudy';
 import { Skills } from './pages/Skills';
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: 'portfolio', element: <Portfolio /> },
       { path: 'projects/:slug', element: <ProjectCaseStudy /> },
       { path: 'contact', element: <Contact /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);
