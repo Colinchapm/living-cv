@@ -51,5 +51,7 @@ describe('SEO configuration', () => {
     for (const route of siteRoutes) {
       expect(sitemap).toContain(`${siteConfig.productionUrl}${route.path}`);
     }
+
+    expect(sitemap).toContain(`${siteConfig.productionUrl}/volunteering`);
   });
 });

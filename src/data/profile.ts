@@ -55,9 +55,9 @@ export const profile = {
   ],
   volunteering: {
     title: 'DIY SOS: The Big Build',
-    role: 'Volunteer Construction Team',
+    role: 'Volunteer Construction Team Member',
     summary:
-      'Contributed as part of a volunteer construction team on a local boys club renovation and performing arts studio conversion.',
+      "Volunteered as part of a construction team supporting a local boys' club renovation and performing arts studio conversion.",
     notes: [
       'Practical construction contribution in a community-focused renovation setting.',
       'Details are kept general because dates, club name, episode details and production claims are not confirmed for this public CV.',

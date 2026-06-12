@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import { Meta } from '../components/Meta';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { experienceEntries } from '../data/experience';
 import { profile } from '../data/profile';
+import { diySosVolunteering } from '../data/volunteering';
 
 export function Experience() {
   return (
@@ -42,9 +44,10 @@ export function Experience() {
       </Section>
       <Section title="Volunteering and community contribution">
         <article className="surface-card p-6">
-          <p className="section-kicker">{profile.volunteering.role}</p>
-          <h2 className="mt-2 text-2xl font-semibold text-white">{profile.volunteering.title}</h2>
-          <p className="mt-3 body-copy">{profile.volunteering.summary}</p>
+          <p className="section-kicker">{diySosVolunteering.period}</p>
+          <h2 className="mt-2 text-2xl font-semibold text-white">{diySosVolunteering.title}</h2>
+          <p className="mt-1 text-cyan-100">{diySosVolunteering.role}</p>
+          <p className="mt-3 body-copy">{diySosVolunteering.project}</p>
           <ul className="mt-5 grid gap-2">
             {profile.volunteering.notes.map((note) => (
               <li
@@ -55,6 +58,9 @@ export function Experience() {
               </li>
             ))}
           </ul>
+          <Link to="/volunteering" className="mt-5 inline-flex accent-link">
+            View volunteering gallery
+          </Link>
         </article>
       </Section>
     </>

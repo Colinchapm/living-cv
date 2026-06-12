@@ -8,6 +8,7 @@ import { portfolioCards } from '../data/portfolio';
 import { profile } from '../data/profile';
 import { siteConfig } from '../data/site';
 import { personJsonLd, profilePageJsonLd, websiteJsonLd } from '../data/structuredData';
+import { diySosVolunteering } from '../data/volunteering';
 
 export function Home() {
   const featuredExperience = experienceEntries.slice(0, 2);
@@ -145,9 +146,10 @@ identity: GitHub OIDC / Workload Identity Federation`}</code>
 
       <Section title="Community contribution">
         <article className="surface-card max-w-4xl p-6">
-          <p className="section-kicker">{profile.volunteering.role}</p>
-          <h2 className="mt-2 text-2xl font-semibold text-white">{profile.volunteering.title}</h2>
-          <p className="mt-3 body-copy">{profile.volunteering.summary}</p>
+          <p className="section-kicker">Community & Volunteer Experience</p>
+          <h2 className="mt-2 text-2xl font-semibold text-white">{diySosVolunteering.title}</h2>
+          <p className="mt-1 text-cyan-100">{diySosVolunteering.role}</p>
+          <p className="mt-3 body-copy">{diySosVolunteering.project}</p>
           <ul className="mt-5 grid gap-2">
             {profile.volunteering.notes.map((note) => (
               <li
@@ -158,6 +160,9 @@ identity: GitHub OIDC / Workload Identity Federation`}</code>
               </li>
             ))}
           </ul>
+          <Link to="/volunteering" className="mt-5 inline-flex accent-link">
+            View volunteering experience and gallery
+          </Link>
         </article>
       </Section>
 
