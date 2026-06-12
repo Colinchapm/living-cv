@@ -4,11 +4,11 @@
 
 @layer components {
   .surface-card {
-    @apply rounded-lg border border-sky-400/20 bg-slate-900/80 text-slate-100 shadow-soft;
+    @apply rounded-lg border border-cyan-300/20 bg-slate-900/80 text-slate-100 shadow-soft backdrop-blur;
   }
 
   .surface-muted {
-    @apply rounded-lg border border-sky-400/15 bg-slate-950/70 text-slate-200;
+    @apply rounded-lg border border-cyan-300/10 bg-slate-950/70 text-slate-200;
   }
 
   .body-copy {
@@ -16,15 +16,31 @@
   }
 
   .accent-link {
-    @apply font-semibold text-sky-300 underline hover:text-sky-100;
+    @apply font-semibold text-cyan-300 underline hover:text-cyan-100;
   }
 
   .primary-action {
-    @apply rounded bg-sky-300 px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-sky-200;
+    @apply rounded-md bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:bg-cyan-200;
   }
 
   .secondary-action {
-    @apply rounded border border-sky-300/40 bg-slate-950 px-5 py-3 text-sm font-semibold text-slate-100 hover:bg-slate-800;
+    @apply rounded-md border border-cyan-300/40 bg-slate-950/80 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-cyan-200/70 hover:bg-slate-800;
+  }
+
+  .tech-badge {
+    @apply rounded-full border border-cyan-300/20 bg-slate-950/80 px-3 py-1.5 text-xs font-medium text-slate-200;
+  }
+
+  .evidence-link {
+    @apply block rounded-md border border-cyan-300/20 bg-slate-950/80 px-3 py-2 text-sm font-semibold text-slate-100 transition hover:border-cyan-200/60 hover:bg-slate-800;
+  }
+
+  .section-kicker {
+    @apply text-sm font-semibold uppercase tracking-wide text-cyan-200;
+  }
+
+  .timeline-card {
+    @apply relative surface-card p-6 before:absolute before:left-0 before:top-6 before:h-3 before:w-3 before:-translate-x-[7px] before:rounded-full before:border before:border-cyan-200 before:bg-slate-950;
   }
 }
 
@@ -45,9 +61,9 @@ body {
   min-width: 320px;
   margin: 0;
   background:
-    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-    #0f172a;
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 34rem),
+    linear-gradient(rgba(34, 211, 238, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.035) 1px, transparent 1px), #07111f;
   background-size: 44px 44px;
 }
 

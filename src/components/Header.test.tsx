@@ -31,8 +31,10 @@ describe('Header', () => {
     renderHeader();
 
     const navigation = screen.getByRole('navigation', { name: /primary navigation/i });
+    const menuButton = screen.getByRole('button', { name: 'Menu' });
 
     expect(navigation).toBeInTheDocument();
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
     expect(within(navigation).getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
     expect(within(navigation).getByRole('link', { name: 'Portfolio' })).toHaveAttribute(
       'href',
@@ -52,5 +54,15 @@ describe('Header', () => {
     await user.click(within(navigation).getByRole('link', { name: 'Portfolio' }));
 
     expect(await screen.findByRole('heading', { name: /^Portfolio$/ })).toBeInTheDocument();
+  });
+
+  it('toggles the mobile navigation state', async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    const menuButton = screen.getByRole('button', { name: 'Menu' });
+
+    await user.click(menuButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
   });
 });

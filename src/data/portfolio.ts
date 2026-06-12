@@ -35,6 +35,40 @@ export type PortfolioProject = {
   evidenceLinks: readonly EvidenceLink[];
 };
 
+export type PortfolioCard = {
+  title: string;
+  status: string;
+  problemSolved: string;
+  primaryPlatform: string;
+  keyTechnologies: readonly string[];
+  evidenceLinks: readonly EvidenceLink[];
+  caseStudyPath: string;
+};
+
+export const livingCvProjectCard: PortfolioCard = {
+  title: 'Living CV',
+  status: 'Live portfolio foundation and deployment preparation',
+  problemSolved:
+    'Turns a CV into verifiable engineering evidence: source code, tests, architecture notes, CI/CD and deployment documentation.',
+  primaryPlatform: 'Google Cloud Run',
+  keyTechnologies: [
+    'React',
+    'TypeScript',
+    'Vite',
+    'Tailwind CSS',
+    'Docker',
+    'nginx',
+    'GitHub Actions',
+    'Terraform',
+  ],
+  evidenceLinks: [
+    { label: 'Source code', href: 'https://github.com/Colinchapm/living-cv', status: 'available' },
+    { label: 'Architecture overview', href: '/docs/architecture/overview.md', status: 'available' },
+    { label: 'Deployment documentation', href: '/docs/deployment/gcp.md', status: 'available' },
+  ],
+  caseStudyPath: '/',
+};
+
 export const portfolioProjects = [
   {
     slug: 'serviceflow-construction',
@@ -155,9 +189,21 @@ export const portfolioProjects = [
       'Demo deployment with monitoring',
     ],
     evidenceLinks: [
-      { label: 'Repository placeholder', href: '#repository-link-placeholder', status: 'placeholder' },
-      { label: 'Live demo placeholder', href: '#live-demo-link-placeholder', status: 'placeholder' },
-      { label: 'Architecture document', href: '/docs/projects/serviceflow-construction.md', status: 'available' },
+      {
+        label: 'Repository placeholder',
+        href: '#repository-link-placeholder',
+        status: 'placeholder',
+      },
+      {
+        label: 'Live demo placeholder',
+        href: '#live-demo-link-placeholder',
+        status: 'placeholder',
+      },
+      {
+        label: 'Architecture document',
+        href: '/docs/projects/serviceflow-construction.md',
+        status: 'available',
+      },
     ],
   },
   {
@@ -275,9 +321,21 @@ export const portfolioProjects = [
       'Reviewable style-matching demonstration',
     ],
     evidenceLinks: [
-      { label: 'Repository placeholder', href: '#repository-link-placeholder', status: 'placeholder' },
-      { label: 'Live demo placeholder', href: '#live-demo-link-placeholder', status: 'placeholder' },
-      { label: 'Architecture document', href: '/docs/projects/inkmatch-studio.md', status: 'available' },
+      {
+        label: 'Repository placeholder',
+        href: '#repository-link-placeholder',
+        status: 'placeholder',
+      },
+      {
+        label: 'Live demo placeholder',
+        href: '#live-demo-link-placeholder',
+        status: 'placeholder',
+      },
+      {
+        label: 'Architecture document',
+        href: '/docs/projects/inkmatch-studio.md',
+        status: 'available',
+      },
     ],
   },
   {
@@ -399,8 +457,16 @@ export const portfolioProjects = [
       'Cloud Run demonstration deployment',
     ],
     evidenceLinks: [
-      { label: 'Repository placeholder', href: '#repository-link-placeholder', status: 'placeholder' },
-      { label: 'Live demo placeholder', href: '#live-demo-link-placeholder', status: 'placeholder' },
+      {
+        label: 'Repository placeholder',
+        href: '#repository-link-placeholder',
+        status: 'placeholder',
+      },
+      {
+        label: 'Live demo placeholder',
+        href: '#live-demo-link-placeholder',
+        status: 'placeholder',
+      },
       {
         label: 'Architecture document',
         href: '/docs/projects/pegasus-engineering-platform.md',
@@ -409,6 +475,19 @@ export const portfolioProjects = [
     ],
   },
 ] as const satisfies readonly PortfolioProject[];
+
+export const portfolioCards = [
+  livingCvProjectCard,
+  ...portfolioProjects.map((project) => ({
+    title: project.title,
+    status: project.status,
+    problemSolved: project.problemStatement,
+    primaryPlatform: project.referenceArchitecture,
+    keyTechnologies: project.technologies.slice(0, 6),
+    evidenceLinks: project.evidenceLinks,
+    caseStudyPath: `/projects/${project.slug}`,
+  })),
+] as const satisfies readonly PortfolioCard[];
 
 export function getProjectBySlug(slug: string) {
   return portfolioProjects.find((project) => project.slug === slug);

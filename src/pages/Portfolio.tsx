@@ -1,7 +1,7 @@
 import { Meta } from '../components/Meta';
 import { PageHeader } from '../components/PageHeader';
 import { ProjectCard } from '../components/ProjectCard';
-import { portfolioProjects } from '../data/portfolio';
+import { portfolioCards } from '../data/portfolio';
 
 export function Portfolio() {
   return (
@@ -19,7 +19,7 @@ export function Portfolio() {
         </p>
       </PageHeader>
       <section className="mx-auto max-w-6xl space-y-5 px-4 py-10 sm:px-6 lg:px-8">
-        {portfolioProjects.map((project) => (
+        {portfolioCards.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}
       </section>

@@ -63,33 +63,61 @@ export function ProjectCaseStudy() {
           </nav>
         </div>
       </PageHeader>
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:px-6 lg:px-8">
-        <Requirements title="Problem statement" items={[project.problemStatement]} />
-        <Requirements title="Intended users" items={project.intendedUsers} />
-        <Requirements title="Functional requirements" items={project.functionalRequirements} />
-        <Requirements title="Non-functional requirements" items={project.nonFunctionalRequirements} />
-        <ArchitectureSummary
-          architecture={project.referenceArchitecture}
-          services={project.proposedArchitecture}
-        />
-        <section className="surface-card p-6">
-          <h2 className="text-2xl font-semibold text-white">Technology badges</h2>
-          <TechnologyList items={project.technologies} label={`${project.title} technologies`} />
-        </section>
-        <SecurityControls items={project.securityConsiderations} />
-        <Requirements title="Data model overview" items={project.dataModelOverview} />
-        <Requirements title="CI/CD approach" items={project.cicdApproach} />
-        <Requirements
-          title="Monitoring and observability"
-          items={project.monitoringAndObservability}
-        />
-        <Requirements title="Testing strategy" items={project.testingStrategy} />
-        <Requirements title="Cost considerations" items={project.costConsiderations} />
-        <Requirements title="Current implementation status" items={project.currentImplementationStatus} />
-        <Requirements title="Known limitations" items={project.knownLimitations} />
-        <Requirements title="Planned next steps" items={project.plannedNextSteps} />
-        <ImplementationRoadmap items={project.roadmap} />
-        <EvidenceLinks links={project.evidenceLinks} />
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8">
+        <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+          <section className="surface-card p-6">
+            <p className="section-kicker">At a glance</p>
+            <dl className="mt-4 grid gap-4 text-sm">
+              <div>
+                <dt className="font-semibold text-cyan-200">Status</dt>
+                <dd className="mt-1 text-slate-200">{project.status}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-cyan-200">Primary platform</dt>
+                <dd className="mt-1 text-slate-200">{project.referenceArchitecture}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-cyan-200">Evidence</dt>
+                <dd className="mt-2">
+                  <EvidenceLinks links={project.evidenceLinks} compact />
+                </dd>
+              </div>
+            </dl>
+          </section>
+          <section className="surface-card p-6">
+            <h2 className="text-xl font-semibold text-white">Technology stack</h2>
+            <TechnologyList items={project.technologies} label={`${project.title} technologies`} />
+          </section>
+        </aside>
+        <div className="grid gap-6">
+          <Requirements title="Problem statement" items={[project.problemStatement]} />
+          <Requirements title="Intended users" items={project.intendedUsers} />
+          <Requirements title="Functional requirements" items={project.functionalRequirements} />
+          <Requirements
+            title="Non-functional requirements"
+            items={project.nonFunctionalRequirements}
+          />
+          <ArchitectureSummary
+            architecture={project.referenceArchitecture}
+            services={project.proposedArchitecture}
+          />
+          <SecurityControls items={project.securityConsiderations} />
+          <Requirements title="Data model overview" items={project.dataModelOverview} />
+          <Requirements title="CI/CD approach" items={project.cicdApproach} />
+          <Requirements
+            title="Monitoring and observability"
+            items={project.monitoringAndObservability}
+          />
+          <Requirements title="Testing strategy" items={project.testingStrategy} />
+          <Requirements title="Cost considerations" items={project.costConsiderations} />
+          <Requirements
+            title="Current implementation status"
+            items={project.currentImplementationStatus}
+          />
+          <Requirements title="Known limitations" items={project.knownLimitations} />
+          <Requirements title="Planned next steps" items={project.plannedNextSteps} />
+          <ImplementationRoadmap items={project.roadmap} />
+        </div>
       </div>
     </>
   );

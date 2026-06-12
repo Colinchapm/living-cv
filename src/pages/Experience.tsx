@@ -2,6 +2,7 @@ import { Meta } from '../components/Meta';
 import { PageHeader } from '../components/PageHeader';
 import { Section } from '../components/Section';
 import { experienceEntries } from '../data/experience';
+import { profile } from '../data/profile';
 
 export function Experience() {
   return (
@@ -13,21 +14,24 @@ export function Experience() {
       />
       <PageHeader title="Experience" eyebrow="Verified record">
         <p>
-          Commercial employment, independent development, prototype work and earlier trade experience
-          are separated clearly.
+          Commercial employment, independent development, prototype work and earlier trade
+          experience are separated clearly.
         </p>
       </PageHeader>
       <Section title="Experience history">
-        <div className="space-y-5">
+        <div className="relative space-y-5 border-l border-cyan-300/20 pl-5">
           {experienceEntries.map((entry) => (
-            <article key={entry.title} className="surface-card p-6">
-              <p className="text-sm font-medium text-clay">{entry.period}</p>
+            <article key={entry.title} className="timeline-card">
+              <p className="section-kicker">{entry.period}</p>
               <h2 className="mt-2 text-xl font-semibold text-white">{entry.title}</h2>
               <p className="mt-1 text-slate-300">{entry.organisation}</p>
               <p className="mt-4 leading-7 text-slate-300">{entry.description}</p>
               <ul className="mt-5 grid gap-2">
                 {entry.evidence.map((item) => (
-                  <li key={item} className="rounded border border-sky-300/20 bg-slate-950 px-3 py-2 text-sm text-slate-200">
+                  <li
+                    key={item}
+                    className="rounded-md border border-cyan-300/20 bg-slate-950/80 px-3 py-2 text-sm text-slate-200"
+                  >
                     {item}
                   </li>
                 ))}
@@ -35,6 +39,23 @@ export function Experience() {
             </article>
           ))}
         </div>
+      </Section>
+      <Section title="Volunteering and community contribution">
+        <article className="surface-card p-6">
+          <p className="section-kicker">{profile.volunteering.role}</p>
+          <h2 className="mt-2 text-2xl font-semibold text-white">{profile.volunteering.title}</h2>
+          <p className="mt-3 body-copy">{profile.volunteering.summary}</p>
+          <ul className="mt-5 grid gap-2">
+            {profile.volunteering.notes.map((note) => (
+              <li
+                key={note}
+                className="rounded-md border border-cyan-300/20 bg-slate-950/80 px-3 py-2 text-sm text-slate-200"
+              >
+                {note}
+              </li>
+            ))}
+          </ul>
+        </article>
       </Section>
     </>
   );

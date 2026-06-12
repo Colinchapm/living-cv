@@ -12,17 +12,20 @@ export function Skills() {
       />
       <PageHeader title="Skills" eyebrow="Capabilities">
         <p>
-          Skills are grouped by practical platform, delivery, development, operations and professional
-          strengths. No unsupported ratings or percentage bars are used.
+          Skills are grouped by practical platform, delivery, development, operations and
+          professional strengths. No unsupported ratings or percentage bars are used.
         </p>
       </PageHeader>
       <section className="mx-auto grid max-w-6xl gap-5 px-4 py-10 sm:px-6 md:grid-cols-2 lg:px-8">
         {skillGroups.map((group) => (
-          <article key={group.title} className="surface-card p-6">
-            <h2 className="text-xl font-semibold text-white">{group.title}</h2>
-            <ul className="mt-5 flex flex-wrap gap-2">
+          <article key={group.title} className="surface-card grid gap-5 p-6">
+            <div>
+              <p className="section-kicker">Capability area</p>
+              <h2 className="mt-2 text-xl font-semibold text-white">{group.title}</h2>
+            </div>
+            <ul className="flex flex-wrap gap-2">
               {group.skills.map((skill) => (
-                <li key={skill} className="rounded border border-sky-300/20 bg-slate-950 px-3 py-2 text-sm text-slate-200">
+                <li key={skill} className="tech-badge">
                   {skill}
                 </li>
               ))}

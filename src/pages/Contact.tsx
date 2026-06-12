@@ -72,24 +72,27 @@ export function Contact() {
         </p>
       </PageHeader>
       <Section title="Contact information">
-        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <address className="space-y-4 not-italic text-slate-300">
-            <p>{profile.location}</p>
-            <p>
-              <a className="accent-link" href={`mailto:${profile.email}`}>
+        <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+          <address className="surface-card space-y-5 p-6 not-italic text-slate-300">
+            <div>
+              <p className="section-kicker">Location</p>
+              <p className="mt-2 text-slate-100">{profile.location}</p>
+            </div>
+            <div>
+              <p className="section-kicker">Availability</p>
+              <p className="mt-2 text-slate-100">{profile.availability}</p>
+            </div>
+            <div className="grid gap-3">
+              <a className="evidence-link" href={`mailto:${profile.email}`}>
                 Email Colin Chapman
               </a>
-            </p>
-            <p>
-              <a className="accent-link" href={profile.githubUrl}>
+              <a className="evidence-link" href={profile.githubUrl}>
                 GitHub profile
               </a>
-            </p>
-            <p>
-              <a className="accent-link" href={profile.linkedinUrl}>
+              <a className="evidence-link" href={profile.linkedinUrl}>
                 LinkedIn profile placeholder
               </a>
-            </p>
+            </div>
           </address>
           <form className="surface-card p-6" onSubmit={handleSubmit} noValidate>
             <div className="grid gap-5">
@@ -98,7 +101,7 @@ export function Contact() {
                   Name
                 </label>
                 <input
-                  className="mt-2 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
+                  className="mt-2 w-full rounded-md border border-cyan-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="name"
                   name="name"
                   type="text"
@@ -116,7 +119,7 @@ export function Contact() {
                   Email
                 </label>
                 <input
-                  className="mt-2 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
+                  className="mt-2 w-full rounded-md border border-cyan-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="email"
                   name="email"
                   type="email"
@@ -139,7 +142,7 @@ export function Contact() {
                   Message
                 </label>
                 <textarea
-                  className="mt-2 min-h-40 w-full rounded border border-sky-300/30 bg-slate-950 px-3 py-2 text-white"
+                  className="mt-2 min-h-40 w-full rounded-md border border-cyan-300/30 bg-slate-950 px-3 py-2 text-white"
                   id="message"
                   name="message"
                   maxLength={maxMessageLength}
@@ -159,7 +162,7 @@ export function Contact() {
               </button>
               {status ? (
                 <p
-                  className="rounded border border-sky-300/30 bg-slate-950 p-4 text-sm text-sky-200"
+                  className="rounded-md border border-cyan-300/30 bg-slate-950 p-4 text-sm text-cyan-100"
                   role="status"
                 >
                   {status}

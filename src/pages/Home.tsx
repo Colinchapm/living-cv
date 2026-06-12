@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import { FeaturedProjectCard } from '../components/ProjectCard';
 import { Meta } from '../components/Meta';
 import { Section } from '../components/Section';
 import { educationEntries } from '../data/education';
 import { experienceEntries } from '../data/experience';
-import { portfolioProjects } from '../data/portfolio';
+import { portfolioCards } from '../data/portfolio';
 import { profile } from '../data/profile';
-import { personJsonLd, profilePageJsonLd, websiteJsonLd } from '../data/structuredData';
 import { siteConfig } from '../data/site';
+import { personJsonLd, profilePageJsonLd, websiteJsonLd } from '../data/structuredData';
 
 export function Home() {
   const featuredExperience = experienceEntries.slice(0, 2);
@@ -20,27 +21,34 @@ export function Home() {
         canonicalPath="/"
         jsonLd={[websiteJsonLd(), profilePageJsonLd('/'), personJsonLd()]}
       />
-      <section className="relative overflow-hidden bg-slate-950">
-        <div className="absolute inset-x-0 top-0 h-px bg-sky-300/50" aria-hidden="true" />
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-forest">
-              AWS | Azure | Google Cloud | DevOps | Platform Support
-            </p>
+      <section className="relative overflow-hidden border-b border-cyan-300/10 bg-slate-950/60">
+        <div
+          className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent"
+          aria-hidden="true"
+        />
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:py-20">
+          <div className="flex flex-col justify-center">
+            <p className="section-kicker">{profile.supportingLine}</p>
             <h1 className="mt-4 text-4xl font-bold tracking-normal text-white sm:text-6xl">
               {profile.name}
             </h1>
-            <p className="mt-4 text-2xl font-semibold text-sky-200">{profile.displayRole}</p>
-            <p className="mt-6 max-w-3xl text-xl leading-9 text-slate-200">
+            <p className="mt-4 text-2xl font-semibold text-cyan-100">{profile.displayRole}</p>
+            <p className="mt-6 max-w-3xl text-xl leading-9 text-slate-100">
               {profile.heroStatement}
             </p>
-            <p className="mt-5 max-w-3xl body-copy">{profile.summary}</p>
+            <dl className="mt-7 grid gap-3 text-sm sm:grid-cols-2">
+              <div className="surface-muted p-4">
+                <dt className="font-semibold text-cyan-200">Location</dt>
+                <dd className="mt-1 text-slate-200">{profile.location}</dd>
+              </div>
+              <div className="surface-muted p-4">
+                <dt className="font-semibold text-cyan-200">Availability</dt>
+                <dd className="mt-1 text-slate-200">{profile.availability}</dd>
+              </div>
+            </dl>
             <div className="no-print mt-8 flex flex-wrap gap-3">
               <Link to="/portfolio" className="primary-action">
                 View Projects
-              </Link>
-              <Link to="/experience" className="secondary-action">
-                View Experience
               </Link>
               <a href={profile.cvDownloadPath} download className="secondary-action">
                 Download CV
@@ -53,20 +61,29 @@ export function Home() {
               </a>
             </div>
           </div>
-          <aside className="surface-card p-6" aria-labelledby="terminal-title">
-            <h2 id="terminal-title" className="text-xl font-semibold text-white">
-              Deployment signal
+          <aside className="surface-card p-6" aria-labelledby="proof-panel-title">
+            <p className="section-kicker">Proof panel</p>
+            <h2 id="proof-panel-title" className="mt-3 text-2xl font-semibold text-white">
+              Evidence, not just claims
             </h2>
-            <pre className="mt-5 overflow-x-auto rounded bg-slate-950 p-4 text-sm leading-7 text-sky-200">
-              <code>{`$ npm run build
-$ docker build .
-$ terraform plan
-$ gh workflow run deploy-gcp.yml`}</code>
-            </pre>
-            <p className="mt-4 body-copy">
-              This portfolio is built as a working cloud-delivery artefact, not a static claims
-              page.
+            <p className="mt-3 body-copy">
+              This site is built as a working delivery artefact with source, tests, documentation
+              and deployment preparation.
             </p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {profile.principles.map((principle) => (
+                <li
+                  key={principle}
+                  className="rounded-md border border-cyan-300/20 bg-slate-950/80 p-3"
+                >
+                  <span className="block text-sm font-semibold text-slate-100">{principle}</span>
+                </li>
+              ))}
+            </ul>
+            <pre className="mt-6 overflow-x-auto rounded-md border border-cyan-300/20 bg-slate-950 p-4 text-sm leading-7 text-cyan-100">
+              <code>{`validate -> build -> container -> Cloud Run
+identity: GitHub OIDC / Workload Identity Federation`}</code>
+            </pre>
           </aside>
         </div>
       </section>
@@ -77,49 +94,36 @@ $ gh workflow run deploy-gcp.yml`}</code>
         </div>
       </Section>
 
-      <Section title="Evidence, not just claims">
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {profile.principles.map((principle) => (
-            <li key={principle} className="surface-card p-4">
-              {principle}
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section title="Technical capabilities">
-        <ul className="flex flex-wrap gap-2">
-          {profile.compactStack.map((item) => (
-            <li
-              key={item}
-              className="rounded border border-sky-300/25 bg-slate-950 px-3 py-2 text-sm text-slate-100"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-        <Link to="/skills" className="mt-5 inline-flex accent-link">
-          View full skills profile
-        </Link>
-      </Section>
-
       <Section title="Featured projects">
-        <div className="grid gap-4 md:grid-cols-3">
-          {portfolioProjects.map((project) => (
-            <article key={project.title} className="surface-card p-5">
-              <p className="w-fit rounded bg-sky-300 px-3 py-1 text-sm font-semibold text-slate-950">
-                {project.status}
-              </p>
-              <h3 className="mt-4 font-semibold text-white">{project.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{project.summary}</p>
-              <Link
-                to={`/projects/${project.slug}`}
-                className="mt-4 inline-flex text-sm accent-link"
-              >
-                Read {project.title} case study
-              </Link>
-            </article>
+        <div className="grid gap-4 lg:grid-cols-4">
+          {portfolioCards.map((project) => (
+            <FeaturedProjectCard key={project.title} project={project} />
           ))}
+        </div>
+      </Section>
+
+      <Section title="Technical capability map">
+        <div className="grid gap-4 md:grid-cols-[0.9fr_1.1fr]">
+          <div className="surface-card p-6">
+            <p className="section-kicker">Cloud and delivery</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">
+              A practical stack for platform work
+            </h2>
+            <p className="mt-3 body-copy">
+              Colin focuses on cloud fundamentals, reliable delivery, supportable documentation and
+              repeatable validation rather than unsupported proficiency ratings.
+            </p>
+            <Link to="/skills" className="mt-5 inline-flex accent-link">
+              View full skills profile
+            </Link>
+          </div>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {profile.compactStack.map((item) => (
+              <li key={item} className="surface-muted p-4 text-sm font-medium text-slate-100">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
 
@@ -127,7 +131,7 @@ $ gh workflow run deploy-gcp.yml`}</code>
         <div className="grid gap-4 md:grid-cols-2">
           {featuredExperience.map((entry) => (
             <article key={entry.title} className="surface-card p-5">
-              <p className="text-sm font-semibold text-sky-300">{entry.period}</p>
+              <p className="section-kicker">{entry.period}</p>
               <h3 className="mt-2 font-semibold text-white">{entry.title}</h3>
               <p className="mt-1 text-slate-300">{entry.organisation}</p>
               <p className="mt-3 text-sm leading-6 text-slate-300">{entry.description}</p>
@@ -139,11 +143,29 @@ $ gh workflow run deploy-gcp.yml`}</code>
         </Link>
       </Section>
 
+      <Section title="Community contribution">
+        <article className="surface-card max-w-4xl p-6">
+          <p className="section-kicker">{profile.volunteering.role}</p>
+          <h2 className="mt-2 text-2xl font-semibold text-white">{profile.volunteering.title}</h2>
+          <p className="mt-3 body-copy">{profile.volunteering.summary}</p>
+          <ul className="mt-5 grid gap-2">
+            {profile.volunteering.notes.map((note) => (
+              <li
+                key={note}
+                className="border-l-4 border-cyan-300/60 pl-4 text-sm leading-6 text-slate-300"
+              >
+                {note}
+              </li>
+            ))}
+          </ul>
+        </article>
+      </Section>
+
       <Section title="Education and certifications">
         <div className="grid gap-4 md:grid-cols-3">
           {featuredEducation.map((entry) => (
             <article key={entry.title} className="surface-muted p-5">
-              <p className="text-sm font-semibold text-sky-300">{entry.period}</p>
+              <p className="section-kicker">{entry.period}</p>
               <h3 className="mt-2 font-semibold text-white">{entry.title}</h3>
               <p className="mt-1 text-sm text-slate-300">{entry.provider}</p>
             </article>
@@ -154,7 +176,7 @@ $ gh workflow run deploy-gcp.yml`}</code>
       <Section title="How Colin works">
         <ul className="grid gap-3 md:grid-cols-2">
           {profile.howColinWorks.map((item) => (
-            <li key={item} className="surface-card border-l-4 border-l-sky-300 p-4">
+            <li key={item} className="surface-card border-l-4 border-l-cyan-300 p-4">
               {item}
             </li>
           ))}
@@ -165,10 +187,7 @@ $ gh workflow run deploy-gcp.yml`}</code>
         <div className="surface-card flex flex-col gap-5 p-6 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-2xl font-semibold text-white">Discuss a cloud or platform role</h2>
-            <p className="mt-3 body-copy">
-              Colin is seeking stable long-term work in cloud engineering, platform support, DevOps,
-              technical support or infrastructure operations.
-            </p>
+            <p className="mt-3 body-copy">{profile.availability}</p>
           </div>
           <Link to="/contact" className="primary-action">
             Contact Colin
