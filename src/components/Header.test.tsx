@@ -6,6 +6,7 @@ import { AppLayout } from './AppLayout';
 import { Home } from '../pages/Home';
 import { Contact } from '../pages/Contact';
 import { Portfolio } from '../pages/Portfolio';
+import { Volunteering } from '../pages/Volunteering';
 
 function renderHeader(path = '/') {
   const router = createMemoryRouter(
@@ -16,6 +17,7 @@ function renderHeader(path = '/') {
         children: [
           { index: true, element: <Home /> },
           { path: 'portfolio', element: <Portfolio /> },
+          { path: 'volunteering', element: <Volunteering /> },
           { path: 'contact', element: <Contact /> },
         ],
       },
@@ -39,6 +41,10 @@ describe('Header', () => {
     expect(within(navigation).getByRole('link', { name: 'Portfolio' })).toHaveAttribute(
       'href',
       '/portfolio',
+    );
+    expect(within(navigation).getByRole('link', { name: 'Volunteering' })).toHaveAttribute(
+      'href',
+      '/volunteering',
     );
     expect(within(navigation).getByRole('link', { name: 'Contact' })).toHaveAttribute(
       'href',
