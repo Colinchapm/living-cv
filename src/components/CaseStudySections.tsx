@@ -53,17 +53,24 @@ export function ImplementationRoadmap({ items }: { items: readonly string[] }) {
   );
 }
 
-export function EvidenceLinks({ links }: { links: readonly EvidenceLink[] }) {
+export function EvidenceLinks({
+  links,
+  compact = false,
+}: {
+  links: readonly EvidenceLink[];
+  compact?: boolean;
+}) {
   return (
-    <section className="surface-card p-6">
-      <h2 className="text-2xl font-semibold text-white">Evidence links</h2>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+    <section className={compact ? '' : 'surface-card p-6'}>
+      {compact ? (
+        <h2 className="sr-only">Evidence links</h2>
+      ) : (
+        <h2 className="text-2xl font-semibold text-white">Evidence links</h2>
+      )}
+      <ul className={`${compact ? '' : 'mt-4'} grid gap-3 ${compact ? '' : 'sm:grid-cols-2'}`}>
         {links.map((link) => (
           <li key={link.label}>
-            <a
-              href={link.href}
-              className="block rounded border border-sky-300/20 bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-100 hover:bg-slate-800"
-            >
+            <a href={link.href} className="evidence-link">
               {link.label}
               <span className="ml-2 font-normal text-slate-400">
                 {link.status === 'placeholder' ? '(placeholder)' : '(available)'}

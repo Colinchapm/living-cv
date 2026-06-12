@@ -23,14 +23,16 @@ export const profile = {
     'He is seeking a stable long-term role in cloud engineering, platform support, DevOps, technical support or infrastructure operations.',
   ],
   principles: [
-    'Deployed on Google Cloud Run',
-    'Automated with GitHub Actions',
-    'Infrastructure managed with Terraform',
-    'Secure deployment using Workload Identity Federation',
-    'Tested with Vitest and Playwright',
-    'Architecture and operational runbooks',
-    'Public GitHub source code',
+    'Google Cloud Run',
+    'GitHub Actions',
+    'Terraform',
+    'Docker',
+    'Workload Identity Federation',
+    'Vitest',
+    'Playwright',
   ],
+  availability:
+    'Open to cloud, platform, DevOps, infrastructure and technical support opportunities.',
   compactStack: [
     'AWS',
     'Azure',
@@ -51,4 +53,15 @@ export const profile = {
     'AI is used as an engineering productivity and accessibility tool.',
     'Generated work is reviewed, tested and validated.',
   ],
+  volunteering: {
+    title: 'DIY SOS: The Big Build',
+    role: 'Volunteer Construction Team',
+    summary:
+      'Contributed as part of a volunteer construction team on a local boys club renovation and performing arts studio conversion.',
+    notes: [
+      'Practical construction contribution in a community-focused renovation setting.',
+      'Details are kept general because dates, club name, episode details and production claims are not confirmed for this public CV.',
+      'Shows hands-on teamwork, sequencing, site awareness and willingness to support community projects.',
+    ],
+  },
 } as const;

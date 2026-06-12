@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { Portfolio } from './Portfolio';
-import { portfolioProjects } from '../data/portfolio';
+import { portfolioCards } from '../data/portfolio';
 
 describe('Portfolio', () => {
   it('renders every structured portfolio project', () => {
@@ -12,30 +12,32 @@ describe('Portfolio', () => {
       </MemoryRouter>,
     );
 
-    for (const project of portfolioProjects) {
+    for (const project of portfolioCards) {
       expect(screen.getByRole('heading', { name: project.title })).toBeInTheDocument();
-      expect(screen.getByText(project.summary)).toBeInTheDocument();
+      expect(screen.getByText(project.problemSolved)).toBeInTheDocument();
     }
 
     expect(screen.getAllByRole('link', { name: 'View case study' })).toHaveLength(
-      portfolioProjects.length,
+      portfolioCards.length - 1,
     );
 
     const caseStudyLinks = screen.getAllByRole('link', { name: 'View case study' });
 
-    for (const [index, project] of portfolioProjects.entries()) {
+    for (const [index, project] of portfolioCards.slice(1).entries()) {
       const card = screen.getByRole('heading', { name: project.title }).closest('article');
 
       expect(card).not.toBeNull();
       expect(
         within(card as HTMLElement).getByText((_, element) =>
-          Boolean(
-            element?.textContent ===
-            `Primary reference architecture: ${project.referenceArchitecture}`,
-          ),
+          Boolean(element?.textContent === project.primaryPlatform),
         ),
       ).toBeInTheDocument();
-      expect(caseStudyLinks[index]).toHaveAttribute('href', `/projects/${project.slug}`);
+      expect(caseStudyLinks[index]).toHaveAttribute('href', project.caseStudyPath);
     }
+
+    expect(screen.getByRole('link', { name: 'View project evidence' })).toHaveAttribute(
+      'href',
+      '/',
+    );
   });
 });

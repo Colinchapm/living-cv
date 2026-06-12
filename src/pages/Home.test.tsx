@@ -13,10 +13,16 @@ describe('Home', () => {
     );
 
     expect(screen.getByRole('heading', { name: 'Colin Chapman' })).toBeInTheDocument();
-    expect(screen.getByText('AWS | Azure | Google Cloud | DevOps | Platform Support')).toBeInTheDocument();
+    expect(
+      screen.getByText('AWS | Azure | Google Cloud | DevOps | Platform Support'),
+    ).toBeInTheDocument();
+    expect(screen.getByText(profile.displayRole)).toBeInTheDocument();
     expect(screen.getByText(profile.heroStatement)).toBeInTheDocument();
+    expect(screen.getByText(profile.location)).toBeInTheDocument();
+    expect(screen.getAllByText(profile.availability)).toHaveLength(2);
     expect(screen.getByRole('heading', { name: 'Evidence, not just claims' })).toBeInTheDocument();
-    expect(screen.getByText('Public GitHub source code')).toBeInTheDocument();
+    expect(screen.getByText('Workload Identity Federation')).toBeInTheDocument();
+    expect(screen.getByText('Playwright')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Download CV' })).toHaveAttribute(
       'href',
       profile.cvDownloadPath,
