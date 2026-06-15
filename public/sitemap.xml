@@ -36,6 +36,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://colinchapman.co.uk/portfolio/construction-services-marketplace</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://colinchapman.co.uk/portfolio/tattoo-work-marketplace</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://colinchapman.co.uk/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

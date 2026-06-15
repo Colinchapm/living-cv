@@ -53,5 +53,9 @@ describe('SEO configuration', () => {
     }
 
     expect(sitemap).toContain(`${siteConfig.productionUrl}/volunteering`);
+    expect(sitemap).toContain(
+      `${siteConfig.productionUrl}/portfolio/construction-services-marketplace`,
+    );
+    expect(sitemap).toContain(`${siteConfig.productionUrl}/portfolio/tattoo-work-marketplace`);
   });
 });

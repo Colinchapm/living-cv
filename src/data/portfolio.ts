@@ -69,6 +69,67 @@ export const livingCvProjectCard: PortfolioCard = {
   caseStudyPath: '/',
 };
 
+export const marketplacePortfolioCards = [
+  {
+    title: 'Construction Services Marketplace',
+    status: 'Concept portfolio case study',
+    problemSolved:
+      'Shows how a local trade marketplace could structure job requests, postcode and trade matching, provider trust signals, quote comparison and admin moderation.',
+    primaryPlatform: 'Google Cloud Run and Cloud SQL',
+    keyTechnologies: [
+      'React',
+      'TypeScript',
+      'Cloud Run',
+      'Cloud SQL',
+      'Cloud Storage',
+      'Terraform',
+      'GitHub Actions',
+    ],
+    evidenceLinks: [
+      {
+        label: 'Case study',
+        href: '/portfolio/construction-services-marketplace',
+        status: 'available',
+      },
+      {
+        label: 'Source code',
+        href: 'https://github.com/Colinchapm/living-cv',
+        status: 'available',
+      },
+    ],
+    caseStudyPath: '/portfolio/construction-services-marketplace',
+  },
+  {
+    title: 'Tattoo Work Marketplace',
+    status: 'Concept portfolio case study',
+    problemSolved:
+      'Shows how a style-led tattoo marketplace could support adult customer discovery, artist portfolios, flash listings, deposits, trust signals and privacy-aware booking.',
+    primaryPlatform: 'Google Cloud Run and Firestore',
+    keyTechnologies: [
+      'React',
+      'TypeScript',
+      'Cloud Run',
+      'Firestore',
+      'Cloud Storage',
+      'Terraform',
+      'GitHub Actions',
+    ],
+    evidenceLinks: [
+      {
+        label: 'Case study',
+        href: '/portfolio/tattoo-work-marketplace',
+        status: 'available',
+      },
+      {
+        label: 'Source code',
+        href: 'https://github.com/Colinchapm/living-cv',
+        status: 'available',
+      },
+    ],
+    caseStudyPath: '/portfolio/tattoo-work-marketplace',
+  },
+] as const satisfies readonly PortfolioCard[];
+
 export const portfolioProjects = [
   {
     slug: 'serviceflow-construction',
@@ -478,6 +539,7 @@ export const portfolioProjects = [
 
 export const portfolioCards = [
   livingCvProjectCard,
+  ...marketplacePortfolioCards,
   ...portfolioProjects.map((project) => ({
     title: project.title,
     status: project.status,

@@ -39,5 +39,16 @@ describe('Portfolio', () => {
       'href',
       '/',
     );
+    const constructionCard = screen
+      .getByRole('heading', { name: 'Construction Services Marketplace' })
+      .closest('article');
+
+    expect(constructionCard).not.toBeNull();
+    expect(
+      within(constructionCard as HTMLElement).getByRole('link', { name: 'Case study available' }),
+    ).toHaveAttribute('href', '/portfolio/construction-services-marketplace');
+    expect(
+      within(constructionCard as HTMLElement).getByRole('link', { name: 'View case study' }),
+    ).toHaveAttribute('href', '/portfolio/construction-services-marketplace');
   });
 });

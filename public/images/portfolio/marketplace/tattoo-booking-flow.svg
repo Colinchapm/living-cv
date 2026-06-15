@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Tattoo booking flow wireframe</title>
+  <desc id="desc">Concept wireframe showing an adult tattoo booking flow with deposit placeholder and privacy-aware booking notes.</desc>
+  <rect width="960" height="720" fill="#07111f"/>
+  <rect x="64" y="56" width="832" height="608" rx="18" fill="#0f172a" stroke="#164e63" stroke-width="2"/>
+  <text x="104" y="122" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Booking request</text>
+  <text x="104" y="158" fill="#a5f3fc" font-family="Arial, sans-serif" font-size="18">Adult customer flow with deposit and privacy notes.</text>
+  <rect x="104" y="214" width="688" height="72" rx="10" fill="#111827" stroke="#38bdf8"/>
+  <text x="132" y="258" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">1. Select artist, flash or consultation</text>
+  <rect x="104" y="318" width="688" height="72" rx="10" fill="#111827" stroke="#334155"/>
+  <text x="132" y="362" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">2. Add placement notes and reference images</text>
+  <rect x="104" y="422" width="328" height="110" rx="10" fill="#082f49" stroke="#38bdf8"/>
+  <text x="132" y="464" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="19">Deposit placeholder</text>
+  <path d="M132 492h220" stroke="#bae6fd" stroke-width="8" stroke-linecap="round"/>
+  <rect x="464" y="422" width="328" height="110" rx="10" fill="#111827" stroke="#334155"/>
+  <text x="492" y="464" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="19">Privacy reminder</text>
+  <path d="M492 492h218" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <rect x="638" y="584" width="154" height="42" rx="8" fill="#67e8f9"/>
+  <text x="676" y="611" fill="#0f172a" font-family="Arial, sans-serif" font-size="16" font-weight="700">Review</text>
+</svg>
