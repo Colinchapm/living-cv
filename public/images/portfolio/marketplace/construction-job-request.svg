@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Construction marketplace job request wireframe</title>
+  <desc id="desc">Concept wireframe showing a guided job request flow with trade, postcode, urgency and photo upload sections.</desc>
+  <rect width="960" height="720" fill="#07111f"/>
+  <rect x="64" y="56" width="832" height="608" rx="18" fill="#0f172a" stroke="#164e63" stroke-width="2"/>
+  <text x="104" y="118" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">Job request</text>
+  <text x="104" y="154" fill="#a5f3fc" font-family="Arial, sans-serif" font-size="18">Trade, postcode, urgency and evidence captured once.</text>
+  <rect x="104" y="206" width="344" height="72" rx="10" fill="#111827" stroke="#38bdf8"/>
+  <text x="128" y="250" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">Trade: electrician</text>
+  <rect x="488" y="206" width="304" height="72" rx="10" fill="#111827" stroke="#38bdf8"/>
+  <text x="512" y="250" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">Postcode: NE29</text>
+  <rect x="104" y="322" width="688" height="88" rx="10" fill="#111827" stroke="#334155"/>
+  <text x="128" y="356" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="18">Describe the job</text>
+  <path d="M128 382h450" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <rect x="104" y="452" width="212" height="118" rx="10" fill="#082f49" stroke="#38bdf8"/>
+  <text x="132" y="516" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="18">Upload photos</text>
+  <rect x="348" y="452" width="444" height="118" rx="10" fill="#111827" stroke="#334155"/>
+  <text x="376" y="496" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="18">Access notes and preferred dates</text>
+  <path d="M376 526h280" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+  <rect x="654" y="600" width="138" height="38" rx="8" fill="#67e8f9"/>
+  <text x="685" y="625" fill="#0f172a" font-family="Arial, sans-serif" font-size="16" font-weight="700">Match</text>
+</svg>

@@ -35,6 +35,16 @@
     "description": "DevOps portfolio and technical project evidence for ServiceFlow Construction, InkMatch Studio and Pegasus Engineering Platform."
   },
   {
+    "path": "/portfolio/construction-services-marketplace",
+    "title": "Construction Services Marketplace Case Study",
+    "description": "A conceptual local trade marketplace case study showing job requests, postcode matching, provider trust signals, quote comparison and Google Cloud architecture."
+  },
+  {
+    "path": "/portfolio/tattoo-work-marketplace",
+    "title": "Tattoo Work Marketplace Case Study",
+    "description": "A conceptual tattoo marketplace case study showing style-led artist discovery, portfolios, flash listings, deposits, trust signals and privacy-aware booking."
+  },
+  {
     "path": "/contact",
     "title": "Contact Colin Chapman",
     "description": "Contact Colin Chapman for cloud engineering, platform support, DevOps, technical support and infrastructure operations opportunities in North East England."

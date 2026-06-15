@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Construction provider profile wireframe</title>
+  <desc id="desc">Concept wireframe showing provider profile details, service area, trust signals and quote comparison actions.</desc>
+  <rect width="960" height="720" fill="#07111f"/>
+  <rect x="64" y="56" width="832" height="608" rx="18" fill="#0f172a" stroke="#164e63" stroke-width="2"/>
+  <circle cx="142" cy="138" r="42" fill="#155e75"/>
+  <text x="208" y="128" fill="#f8fafc" font-family="Arial, sans-serif" font-size="30" font-weight="700">Provider profile</text>
+  <text x="208" y="164" fill="#a5f3fc" font-family="Arial, sans-serif" font-size="18">Coverage, trade category and quote actions.</text>
+  <rect x="104" y="220" width="300" height="352" rx="12" fill="#111827" stroke="#334155"/>
+  <text x="132" y="260" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">Trust signals</text>
+  <path d="M132 304h210M132 352h174M132 400h222M132 448h188" stroke="#38bdf8" stroke-width="10" stroke-linecap="round"/>
+  <rect x="448" y="220" width="344" height="96" rx="12" fill="#082f49" stroke="#38bdf8"/>
+  <text x="476" y="275" fill="#e0f2fe" font-family="Arial, sans-serif" font-size="20">Service area: NE postcodes</text>
+  <rect x="448" y="352" width="344" height="96" rx="12" fill="#111827" stroke="#334155"/>
+  <text x="476" y="407" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="20">Structured quote response</text>
+  <rect x="448" y="486" width="160" height="48" rx="9" fill="#67e8f9"/>
+  <text x="490" y="517" fill="#0f172a" font-family="Arial, sans-serif" font-size="17" font-weight="700">Compare</text>
+  <rect x="632" y="486" width="160" height="48" rx="9" fill="none" stroke="#67e8f9"/>
+  <text x="675" y="517" fill="#a5f3fc" font-family="Arial, sans-serif" font-size="17" font-weight="700">Shortlist</text>
+</svg>

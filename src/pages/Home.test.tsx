@@ -32,5 +32,11 @@ describe('Home', () => {
       'href',
       profile.githubUrl,
     );
+    expect(
+      screen.getByRole('link', { name: 'Read Construction Services Marketplace case study' }),
+    ).toHaveAttribute('href', '/portfolio/construction-services-marketplace');
+    expect(
+      screen.getByRole('link', { name: 'Read Tattoo Work Marketplace case study' }),
+    ).toHaveAttribute('href', '/portfolio/tattoo-work-marketplace');
   });
 });
