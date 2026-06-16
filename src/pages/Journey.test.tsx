@@ -53,12 +53,10 @@ describe('Journey', () => {
   it('renders accessible placeholders when optional images are missing', () => {
     renderJourney();
 
-    const profileImage = screen.getByAltText('Portrait placeholder for Colin Chapman');
+    const profileImage = screen.getByAltText('Portrait of Colin Chapman');
     fireEvent.error(profileImage);
 
-    expect(
-      screen.getByRole('img', { name: 'Portrait placeholder for Colin Chapman' }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Portrait of Colin Chapman' })).toBeInTheDocument();
     expect(screen.getByText('Profile image placeholder')).toBeInTheDocument();
   });
 

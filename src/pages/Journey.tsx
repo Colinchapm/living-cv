@@ -97,8 +97,9 @@ export function Journey() {
               </p>
               <p>
                 Charlie was diagnosed autistic in 2013. During the assessment process many of the
-                observations sounded familiar. Comments such as “You weren&apos;t potty trained
-                until late either” and “He&apos;s a copy of you” started appearing regularly.
+                observations sounded familiar. Comments such as &quot;You weren&apos;t potty trained
+                until late either&quot; and &quot;He&apos;s a copy of you&quot; started appearing
+                regularly.
               </p>
               <p>
                 What began as a process of understanding my son gradually became a process of
@@ -238,7 +239,7 @@ export function Journey() {
         </div>
       </Section>
 
-      <Section title="Image placeholders">
+      <Section title="Personal image gallery">
         <div className="grid gap-4 md:grid-cols-2">
           {journeyImages.slice(1).map((image) => (
             <JourneyImageCard key={image.src} image={image} />

@@ -86,7 +86,7 @@ export const journeyPrinciples = [
   {
     title: 'Systems That Work for Real People',
     description:
-      'Supporting autistic children strengthened Colin’s belief that systems should work for real people rather than ideal circumstances.',
+      "Supporting autistic children strengthened Colin's belief that systems should work for real people rather than ideal circumstances.",
   },
 ] as const satisfies readonly JourneyPrinciple[];
 
@@ -128,21 +128,30 @@ export const skillsFromCaring = [
 export const journeyImages = [
   {
     src: '/images/journey/colin-profile.jpg',
-    alt: 'Portrait placeholder for Colin Chapman',
-    caption: 'Optional profile image space for Colin Chapman.',
+    alt: 'Portrait of Colin Chapman',
+    caption: 'A clear profile image for the personal journey page.',
     fallbackLabel: 'Profile image placeholder',
   },
   {
     src: '/images/journey/colin-family-context.jpg',
-    alt: 'Family context image placeholder for Colin Chapman',
-    caption: 'Optional image space representing family context without exposing private details.',
+    alt: 'Colin Chapman on a family day out in a park',
+    caption:
+      "A positive family moment representing the caring context behind Colin's professional journey.",
     fallbackLabel: 'Family context image placeholder',
   },
   {
-    src: '/images/journey/colin-working.jpg',
-    alt: 'Working image placeholder for Colin Chapman',
-    caption: 'Optional image space representing focused technical work.',
-    fallbackLabel: 'Working image placeholder',
+    src: '/images/journey/colin-family-day-out.jpg',
+    alt: 'Colin Chapman smiling during a family day out',
+    caption:
+      'A relaxed family moment showing the responsibility, perspective and motivation behind the Living CV.',
+    fallbackLabel: 'Family day out image placeholder',
+  },
+  {
+    src: '/images/journey/colin-family-adventure.jpg',
+    alt: 'Colin Chapman with family during a visitor attraction day out',
+    caption:
+      'A family day out image included as personal context, without naming other people or adding private details.',
+    fallbackLabel: 'Family adventure image placeholder',
   },
 ] as const satisfies readonly JourneyImage[];
 
