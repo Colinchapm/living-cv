@@ -33,6 +33,13 @@ describe('Home', () => {
       profile.githubUrl,
     );
     expect(
+      screen.getByRole('heading', { name: 'The Person Behind The Platform' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Read My Journey' })).toHaveAttribute(
+      'href',
+      '/journey',
+    );
+    expect(
       screen.getByRole('link', { name: 'Read Construction Services Marketplace case study' }),
     ).toHaveAttribute('href', '/portfolio/construction-services-marketplace');
     expect(

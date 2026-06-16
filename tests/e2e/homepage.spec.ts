@@ -7,6 +7,11 @@ test('homepage navigation reaches key sections', async ({ page }) => {
 
   const navigation = page.getByRole('navigation', { name: 'Primary navigation' });
 
+  await navigation.getByRole('link', { name: 'Journey' }).click();
+  await expect(
+    page.getByRole('heading', { name: 'The Person Behind The Platform', exact: true }),
+  ).toBeVisible();
+
   await navigation.getByRole('link', { name: 'Portfolio' }).click();
   await expect(page.getByRole('heading', { name: 'Portfolio', exact: true })).toBeVisible();
   await expect(

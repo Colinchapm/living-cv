@@ -6,6 +6,7 @@ import { ConstructionServicesMarketplace } from './pages/ConstructionServicesMar
 import { Education } from './pages/Education';
 import { Experience } from './pages/Experience';
 import { Home } from './pages/Home';
+import { Journey } from './pages/Journey';
 import { NotFound } from './pages/NotFound';
 import { Portfolio } from './pages/Portfolio';
 import { ProjectCaseStudy } from './pages/ProjectCaseStudy';
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'journey', element: <Journey /> },
       { path: 'about', element: <About /> },
       { path: 'skills', element: <Skills /> },
       { path: 'experience', element: <Experience /> },

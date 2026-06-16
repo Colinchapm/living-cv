@@ -53,6 +53,7 @@ describe('SEO configuration', () => {
     }
 
     expect(sitemap).toContain(`${siteConfig.productionUrl}/volunteering`);
+    expect(sitemap).toContain(`${siteConfig.productionUrl}/journey`);
     expect(sitemap).toContain(
       `${siteConfig.productionUrl}/portfolio/construction-services-marketplace`,
     );
