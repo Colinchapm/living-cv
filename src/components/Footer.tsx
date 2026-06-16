@@ -13,6 +13,9 @@ export function Footer() {
           </p>
         </div>
         <div className="flex flex-wrap gap-3 md:justify-end">
+          <a className="accent-link" href="/journey">
+            Journey
+          </a>
           <a className="accent-link" href="/volunteering">
             Volunteering
           </a>

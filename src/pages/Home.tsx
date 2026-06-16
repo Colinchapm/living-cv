@@ -90,8 +90,23 @@ identity: GitHub OIDC / Workload Identity Federation`}</code>
       </section>
 
       <Section title="Professional introduction">
-        <div className="surface-card max-w-4xl p-6">
-          <p className="body-copy">{profile.introduction}</p>
+        <div className="grid gap-4 lg:grid-cols-[1fr_0.72fr]">
+          <div className="surface-card p-6">
+            <p className="body-copy">{profile.introduction}</p>
+          </div>
+          <article className="surface-card p-6">
+            <p className="section-kicker">Personal journey</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">
+              The Person Behind The Platform
+            </h2>
+            <p className="mt-3 body-copy">
+              Father, parent carer, autistic professional and cloud engineer building a route back
+              into technology through evidence, resilience and practical delivery.
+            </p>
+            <Link to="/journey" className="mt-5 inline-flex accent-link">
+              Read My Journey
+            </Link>
+          </article>
         </div>
       </Section>
 

@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { AppLayout } from './AppLayout';
 import { Home } from '../pages/Home';
 import { Contact } from '../pages/Contact';
+import { Journey } from '../pages/Journey';
 import { Portfolio } from '../pages/Portfolio';
 import { Volunteering } from '../pages/Volunteering';
 
@@ -16,6 +17,7 @@ function renderHeader(path = '/') {
         element: <AppLayout />,
         children: [
           { index: true, element: <Home /> },
+          { path: 'journey', element: <Journey /> },
           { path: 'portfolio', element: <Portfolio /> },
           { path: 'volunteering', element: <Volunteering /> },
           { path: 'contact', element: <Contact /> },
@@ -38,6 +40,10 @@ describe('Header', () => {
     expect(navigation).toBeInTheDocument();
     expect(menuButton).toHaveAttribute('aria-expanded', 'false');
     expect(within(navigation).getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
+    expect(within(navigation).getByRole('link', { name: 'Journey' })).toHaveAttribute(
+      'href',
+      '/journey',
+    );
     expect(within(navigation).getByRole('link', { name: 'Portfolio' })).toHaveAttribute(
       'href',
       '/portfolio',

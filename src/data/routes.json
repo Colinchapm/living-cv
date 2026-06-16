@@ -10,6 +10,11 @@
     "description": "Professional profile for Colin Chapman, a Platform Engineer and North Tyneside technology professional with AWS, Azure, Google Cloud, Python, Linux, SQL and platform support experience."
   },
   {
+    "path": "/journey",
+    "title": "My Journey | Colin Chapman",
+    "description": "The personal journey behind Colin Chapman's Living CV: fatherhood, autism, caring responsibilities, resilience, systems thinking and a return to cloud and platform engineering."
+  },
+  {
     "path": "/skills",
     "title": "Cloud and DevOps Skills",
     "description": "Cloud, DevOps, platform support and systems skills across AWS, Microsoft Azure, Google Cloud, CI/CD, Terraform, Docker, Python, Linux and SQL."
