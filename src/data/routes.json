@@ -1,8 +1,8 @@
 [
   {
     "path": "/",
-    "title": "Colin Chapman Cloud Engineer",
-    "description": "Colin Chapman is a Cloud & Platform Engineer in North Tyneside and Newcastle upon Tyne, showing a DevOps portfolio with Cloud Run, Terraform, GitHub Actions, AWS, Azure and Google Cloud evidence."
+    "title": "Colin Chapman Living CV",
+    "description": "Colin Chapman is a product-minded builder, problem solver, dad, carer and cloud-focused technologist sharing selected work, Journey context and delivery evidence."
   },
   {
     "path": "/about",
@@ -42,12 +42,12 @@
   {
     "path": "/portfolio/construction-services-marketplace",
     "title": "Construction Services Marketplace Case Study",
-    "description": "A conceptual local trade marketplace case study showing job requests, postcode matching, provider trust signals, quote comparison and Google Cloud architecture."
+    "description": "A proof-led local trade marketplace case study showing structured job requests, postcode matching, provider trust signals, quote comparison, MVP scope and target KPIs."
   },
   {
     "path": "/portfolio/tattoo-work-marketplace",
     "title": "Tattoo Work Marketplace Case Study",
-    "description": "A conceptual tattoo marketplace case study showing style-led artist discovery, portfolios, flash listings, deposits, trust signals and privacy-aware booking."
+    "description": "A proof-led tattoo marketplace case study showing style-led artist discovery, portfolio evidence, adult booking flows, deposits, privacy-aware handling and target KPIs."
   },
   {
     "path": "/contact",

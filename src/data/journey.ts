@@ -19,6 +19,8 @@ export interface JourneyImage {
   alt: string;
   caption: string;
   fallbackLabel: string;
+  width: number;
+  height: number;
 }
 
 export const journeyTimeline = [
@@ -30,7 +32,7 @@ export const journeyTimeline = [
   },
   {
     year: '2011',
-    title: 'Became a father',
+    title: 'Became a father after graduating',
     description:
       'Fatherhood brought new responsibility, purpose and a practical need to learn quickly in real situations.',
   },
@@ -38,13 +40,13 @@ export const journeyTimeline = [
     year: '2013',
     title: 'Charlie diagnosed autistic',
     description:
-      'The family began navigating education systems, health services, assessments, support plans and advocacy.',
+      "During Charlie's assessment, people often commented that he was Colin's double or a copy of him. Comments about Colin's own childhood, including late potty training, helped him recognise similarities while the family navigated education systems, assessments and support plans.",
   },
   {
     year: '2015',
     title: 'Colin diagnosed autistic',
     description:
-      'What began as a process of understanding his son gradually became part of Colin understanding himself.',
+      "Colin received his own autism diagnosis after recognising high-level similarities through Charlie's assessment process.",
   },
   {
     year: '2015',
@@ -54,13 +56,13 @@ export const journeyTimeline = [
   },
   {
     year: '2018',
-    title: 'Alexander (Xander) diagnosed autistic',
+    title: 'Xander diagnosed autistic',
     description:
       'Colin continued developing the patience, evidence gathering and adaptive communication required to support different learning needs.',
   },
   {
     year: '2022',
-    title: 'Elizabeth (Lilly) diagnosed autistic',
+    title: 'Lilly diagnosed autistic',
     description:
       'The family context further reinforced the importance of structure, empathy, consistency and flexible problem-solving.',
   },
@@ -81,12 +83,12 @@ export const journeyPrinciples = [
   {
     title: 'Consistency Over Drama',
     description:
-      'Meaningful progress rarely happens overnight. Practice matters, consistency matters, and when a problem cannot be solved today, Colin learns, adapts and continues tomorrow.',
+      'The biggest effect of change comes from the effort put into it. Meaningful progress rarely happens overnight: repetition, practice, persistence and consistency matter.',
   },
   {
     title: 'Systems That Work for Real People',
     description:
-      'Supporting autistic children strengthened Colin’s belief that systems should work for real people rather than ideal circumstances.',
+      "Becoming a parent carer strengthened Colin's belief that systems should work for real people rather than ideal circumstances.",
   },
 ] as const satisfies readonly JourneyPrinciple[];
 
@@ -95,6 +97,7 @@ export const skillsFromCaring = [
     title: 'Breaking Complexity Down',
     examples: [
       'Turning large problems into smaller, achievable steps.',
+      'Breaking processes into smaller chunks so they can be repeated, practised and improved.',
       'Adapting explanations for different ways of learning.',
       'Building confidence through repeatable progress.',
     ],
@@ -112,7 +115,7 @@ export const skillsFromCaring = [
     examples: [
       'Prioritising what matters most.',
       'Designing routines and processes that reduce friction.',
-      'Staying calm when plans need to change.',
+      'Staying calm when plans need to change and taking ownership when something needs doing.',
     ],
   },
   {
@@ -120,7 +123,7 @@ export const skillsFromCaring = [
     examples: [
       'Troubleshooting methodically.',
       'Recognising patterns across systems.',
-      'Applying resilience, empathy and continuous learning to cloud and platform work.',
+      'Applying resilience, user empathy, repetition and continuous learning to cloud and platform work.',
     ],
   },
 ] as const satisfies readonly JourneySkill[];
@@ -128,21 +131,27 @@ export const skillsFromCaring = [
 export const journeyImages = [
   {
     src: '/images/journey/colin-profile.jpg',
-    alt: 'Portrait placeholder for Colin Chapman',
-    caption: 'Optional profile image space for Colin Chapman.',
+    alt: 'Portrait of Colin Chapman for the personal journey page',
+    caption: 'Profile image support for the personal journey page.',
     fallbackLabel: 'Profile image placeholder',
+    width: 900,
+    height: 1200,
   },
   {
     src: '/images/journey/colin-family-context.jpg',
-    alt: 'Family context image placeholder for Colin Chapman',
-    caption: 'Optional image space representing family context without exposing private details.',
+    alt: 'Colin Chapman in a positive family context',
+    caption: 'A privacy-conscious family context image space without naming other people.',
     fallbackLabel: 'Family context image placeholder',
+    width: 1600,
+    height: 1200,
   },
   {
     src: '/images/journey/colin-working.jpg',
-    alt: 'Working image placeholder for Colin Chapman',
+    alt: 'Colin Chapman focused on practical technical work',
     caption: 'Optional image space representing focused technical work.',
     fallbackLabel: 'Working image placeholder',
+    width: 1600,
+    height: 1200,
   },
 ] as const satisfies readonly JourneyImage[];
 

@@ -17,8 +17,8 @@ export function Home() {
   return (
     <>
       <Meta
-        title="Colin Chapman Cloud Engineer"
-        description="Colin Chapman is a Cloud & Platform Engineer in North Tyneside and Newcastle upon Tyne, showing a DevOps portfolio with Cloud Run, Terraform, GitHub Actions, AWS, Azure and Google Cloud evidence."
+        title="Colin Chapman Living CV"
+        description="Colin Chapman is a product-minded builder, problem solver, dad, carer and cloud-focused technologist sharing selected work, Journey context and delivery evidence."
         canonicalPath="/"
         jsonLd={[websiteJsonLd(), profilePageJsonLd('/'), personJsonLd()]}
       />
@@ -27,15 +27,20 @@ export function Home() {
           className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent"
           aria-hidden="true"
         />
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:py-20">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:py-20">
           <div className="flex flex-col justify-center">
-            <p className="section-kicker">{profile.supportingLine}</p>
-            <h1 className="mt-4 text-4xl font-bold tracking-normal text-white sm:text-6xl">
-              {profile.name}
+            <p className="section-kicker">Living CV | colinchapman.co.uk</p>
+            <h1 className="mt-4 text-4xl font-bold tracking-normal text-white sm:text-5xl lg:text-6xl">
+              Colin Chapman - product-minded builder, problem solver, dad and carer.
             </h1>
-            <p className="mt-4 text-2xl font-semibold text-cyan-100">{profile.displayRole}</p>
-            <p className="mt-6 max-w-3xl text-xl leading-9 text-slate-100">
-              {profile.heroStatement}
+            <p className="mt-5 max-w-3xl text-xl leading-9 text-slate-100">
+              I build practical digital products around real constraints. My Living CV brings
+              together product thinking, hands-on delivery, and the perspective I have gained
+              through responsibility, resilience and care.
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
+              I have learned to break difficult problems into smaller, workable steps - in projects,
+              in life, and under pressure.
             </p>
             <dl className="mt-7 grid gap-3 text-sm sm:grid-cols-2">
               <div className="surface-muted p-4">
@@ -49,18 +54,30 @@ export function Home() {
             </dl>
             <div className="no-print mt-8 flex flex-wrap gap-3">
               <Link to="/portfolio" className="primary-action">
-                View Projects
+                View selected work
+              </Link>
+              <Link to="/journey" className="primary-action">
+                Read my journey
               </Link>
               <a href={profile.cvDownloadPath} download className="secondary-action">
                 Download CV
               </a>
-              <Link to="/contact" className="secondary-action">
-                Contact Colin
-              </Link>
               <a href={siteConfig.githubUrl} className="secondary-action">
                 View GitHub
               </a>
             </div>
+            <ul
+              className="mt-7 flex flex-wrap gap-2"
+              aria-label="Proof strip: React, TypeScript, GCP, Cloud Run, Terraform, Accessibility-minded"
+            >
+              {['React', 'TypeScript', 'GCP', 'Cloud Run', 'Terraform', 'Accessibility-minded'].map(
+                (item) => (
+                  <li key={item} className="tech-badge">
+                    {item}
+                  </li>
+                ),
+              )}
+            </ul>
           </div>
           <aside className="surface-card p-6" aria-labelledby="proof-panel-title">
             <p className="section-kicker">Proof panel</p>
@@ -100,11 +117,11 @@ identity: GitHub OIDC / Workload Identity Federation`}</code>
               The Person Behind The Platform
             </h2>
             <p className="mt-3 body-copy">
-              Father, parent carer, autistic professional and cloud engineer building a route back
-              into technology through evidence, resilience and practical delivery.
+              The experience that shaped how I work: responsibility, resilience, teaching,
+              persistence and calm under pressure.
             </p>
             <Link to="/journey" className="mt-5 inline-flex accent-link">
-              Read My Journey
+              Read my journey
             </Link>
           </article>
         </div>

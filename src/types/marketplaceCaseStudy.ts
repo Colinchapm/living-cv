@@ -34,6 +34,8 @@ export type MarketplaceCaseStudyProject = {
   status: MarketplaceCaseStudyStatus;
   targetAudience: readonly string[];
   businessValue: readonly string[];
+  customerValue: readonly string[];
+  validationPlan: readonly string[];
   challenge: string;
   customerFlow: readonly string[];
   userStories: readonly UserStory[];

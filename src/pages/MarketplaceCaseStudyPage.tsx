@@ -12,7 +12,7 @@ import { TrustPanel } from '../components/case-study/TrustPanel';
 import { UserStoryList } from '../components/case-study/UserStoryList';
 import { Meta } from '../components/Meta';
 import { TechnologyList } from '../components/CaseStudySections';
-import { breadcrumbJsonLd } from '../data/structuredData';
+import { breadcrumbJsonLd, marketplaceCaseStudyJsonLd } from '../data/structuredData';
 import type { MarketplaceCaseStudyProject } from '../types/marketplaceCaseStudy';
 
 type MarketplaceCaseStudyPageProps = {
@@ -21,10 +21,13 @@ type MarketplaceCaseStudyPageProps = {
 
 const sections = [
   { id: 'problem', heading: 'Problem and users' },
+  { id: 'business', heading: 'Business value' },
+  { id: 'customer', heading: 'Customer value' },
   { id: 'flow', heading: 'Marketplace flow' },
   { id: 'architecture', heading: 'Architecture' },
   { id: 'trust', heading: 'Trust and safety' },
   { id: 'features', heading: 'MVP features' },
+  { id: 'validate', heading: 'Validate first' },
   { id: 'kpis', heading: 'KPIs' },
   { id: 'gallery', heading: 'Gallery' },
   { id: 'next', heading: 'Next steps' },
@@ -45,6 +48,7 @@ export function MarketplaceCaseStudyPage({ project }: MarketplaceCaseStudyPagePr
             { name: 'Portfolio', path: '/portfolio' },
             { name: project.title, path: canonicalPath },
           ]),
+          marketplaceCaseStudyJsonLd(project),
         ]}
       />
       <CaseStudyHero
@@ -81,6 +85,22 @@ export function MarketplaceCaseStudyPage({ project }: MarketplaceCaseStudyPagePr
             <UserStoryList stories={project.userStories} />
           </CaseStudySection>
 
+          <CaseStudySection
+            id="business"
+            heading="Why this matters to the business"
+            intro="This section frames the concept as business-facing product thinking, not as a claim of live commercial performance."
+          >
+            <FeatureChecklist features={project.businessValue} />
+          </CaseStudySection>
+
+          <CaseStudySection
+            id="customer"
+            heading="Why this matters to the customer"
+            intro="The customer value is deliberately described as intended product value to validate, not proven production impact."
+          >
+            <FeatureChecklist features={project.customerValue} />
+          </CaseStudySection>
+
           <CaseStudySection id="flow" heading="Marketplace flow">
             <FeatureChecklist features={project.customerFlow} />
             <div className="mt-5">
@@ -115,6 +135,14 @@ export function MarketplaceCaseStudyPage({ project }: MarketplaceCaseStudyPagePr
 
           <CaseStudySection id="features" heading="MVP features">
             <FeatureChecklist features={project.mvpFeatures} />
+          </CaseStudySection>
+
+          <CaseStudySection
+            id="validate"
+            heading="What I would validate first"
+            intro="These are the first assumptions I would test before treating the marketplace concept as ready for real users."
+          >
+            <FeatureChecklist features={project.validationPlan} />
           </CaseStudySection>
 
           <CaseStudySection

@@ -50,7 +50,7 @@ const ogImage = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="63
   <path d="M760 250h220M760 300h140M760 350h180" stroke="#e2e8f0" stroke-width="8" stroke-linecap="round"/>
   <text x="140" y="405" fill="#f8fafc" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700">Colin Chapman</text>
   <text x="140" y="462" fill="#bae6fd" font-family="Inter, Arial, sans-serif" font-size="34">Cloud &amp; Platform Engineer</text>
-  <text x="140" y="525" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="25">AWS · Azure · Google Cloud · Terraform · GitHub Actions</text>
+  <text x="140" y="525" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="25">AWS | Azure | Google Cloud | Terraform | GitHub Actions</text>
 </svg>
 `;
 

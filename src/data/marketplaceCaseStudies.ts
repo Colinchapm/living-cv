@@ -7,7 +7,7 @@ export const marketplaceCaseStudies = [
     domain: 'construction-services',
     eyebrow: 'Marketplace design example',
     summary:
-      'A trust-led local trade marketplace concept showing how I would structure job requests, postcode and trade matching, provider profiles, quote comparison and moderation workflows.',
+      'I designed this concept to show how a trust-led marketplace could turn vague service requests into better-qualified leads, faster responses and clearer quote comparison for both homeowners and trade businesses.',
     role: 'Product architecture, UX workflow design and cloud solution design',
     status: 'Concept portfolio case study',
     targetAudience: [
@@ -21,6 +21,18 @@ export const marketplaceCaseStudies = [
       'Help customers compare quotes using consistent information rather than guesswork.',
       'Give providers better qualified leads by matching trade type, postcode and service area.',
       'Support admin review of profiles, trust signals and flagged enquiries before public claims are displayed.',
+    ],
+    customerValue: [
+      'Customers can explain a job once using guided questions, photos and postcode information.',
+      'Quote comparison becomes clearer because each provider responds to the same structured request.',
+      'Trust signals are shown with source and review context rather than unsupported blanket claims.',
+      'The flow reduces the uncertainty that often sits between first enquiry and realistic quote.',
+    ],
+    validationPlan: [
+      'Validate whether homeowners understand the guided request questions without support.',
+      'Test postcode and trade matching with synthetic providers before adding commercial workflows.',
+      'Review provider trust-signal wording with tradespeople to avoid overclaiming.',
+      'Measure whether structured quote comparison improves customer confidence in prototype testing.',
     ],
     challenge:
       'Local trade discovery can break down before quoting starts: customers describe work inconsistently, providers spend time qualifying unsuitable leads, and generic trust badges can be unclear. I designed this concept to demonstrate a practical marketplace flow without claiming live users, customers or commercial results.',
@@ -158,7 +170,7 @@ export const marketplaceCaseStudies = [
     domain: 'tattoo-work',
     eyebrow: 'Marketplace design example',
     summary:
-      'A style-led tattoo marketplace concept for adult customers, artists and studios, focused on portfolio discovery, flash listings, deposit-based booking and privacy-aware handling of booking information.',
+      'I designed this concept to show how a visual, booking-led marketplace could reduce admin friction for artists while giving customers a clearer, safer path from discovery to deposit and confirmed booking.',
     role: 'Product architecture, UX workflow design and privacy-aware marketplace design',
     status: 'Concept portfolio case study',
     targetAudience: [
@@ -172,6 +184,18 @@ export const marketplaceCaseStudies = [
       'Reduce fragmented booking conversations spread across social messages.',
       'Use deposits and confirmations to reduce avoidable booking friction.',
       'Handle booking details, reference images and consent-related information with privacy awareness.',
+    ],
+    customerValue: [
+      'Adult customers can discover artists through style, portfolio evidence and availability cues.',
+      'Booking steps make deposits, consultation notes and reference images easier to understand.',
+      'Sensitive booking information is treated as private workflow data rather than public profile content.',
+      'Trust signals use careful wording so customers can see what has been supplied, reviewed or still needs checking.',
+    ],
+    validationPlan: [
+      'Validate style-led search language with artists and adult customers before building deeper matching.',
+      'Test whether portfolio and flash listing cards help customers shortlist without extra admin messages.',
+      'Review deposit wording and cancellation expectations before selecting a payment provider.',
+      'Define privacy and retention rules for reference images and booking notes before any live use.',
     ],
     challenge:
       'Tattoo discovery is highly visual, but booking often moves through informal messages, inconsistent deposit handling and unclear trust signals. I designed this concept to show how a marketplace could support adult customers and artists without claiming a live studio network, customers or production results.',
