@@ -11,9 +11,15 @@ import {
   skillsFromCaring,
   type JourneyImage,
 } from '../data/journey';
-import { breadcrumbJsonLd } from '../data/structuredData';
+import { breadcrumbJsonLd, journeyProfilePageJsonLd, personJsonLd } from '../data/structuredData';
 
-function JourneyImageCard({ image }: { image: JourneyImage }) {
+function JourneyImageCard({
+  image,
+  priority = false,
+}: {
+  image: JourneyImage;
+  priority?: boolean;
+}) {
   const [hasError, setHasError] = useState(false);
 
   return (
@@ -31,7 +37,11 @@ function JourneyImageCard({ image }: { image: JourneyImage }) {
           src={image.src}
           alt={image.alt}
           className="aspect-[4/3] w-full object-cover"
-          loading="lazy"
+          width={image.width}
+          height={image.height}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          sizes="(min-width: 1024px) 420px, 100vw"
           onError={() => setHasError(true)}
         />
       )}
@@ -52,6 +62,8 @@ export function Journey() {
             { name: 'Home', path: '/' },
             { name: 'My Journey', path: '/journey' },
           ]),
+          journeyProfilePageJsonLd(),
+          personJsonLd(),
         ]}
       />
       <section className="relative overflow-hidden border-b border-cyan-300/10 bg-slate-950/60">
@@ -78,7 +90,7 @@ export function Journey() {
               </Link>
             </div>
           </div>
-          <JourneyImageCard image={journeyImages[0]} />
+          <JourneyImageCard image={journeyImages[0]} priority />
         </div>
       </section>
 
@@ -87,18 +99,19 @@ export function Journey() {
           <article className="surface-card p-6">
             <div className="space-y-5 body-copy">
               <p>
-                I graduated with a Foundation Degree in Computing in 2010 and expected to follow a
-                fairly traditional path into technology.
+                One minute I had graduated with a Foundation Degree in Computing in 2010 and was
+                figuring out who I wanted to be.
               </p>
-              <p>Life had other plans.</p>
+              <p>Then life sped up.</p>
               <p>
-                As my family grew, I found myself navigating a world of education systems, health
-                services, assessments, support plans and advocacy.
+                Work, family, diagnosis, caring and responsibility arrived together. I did not grow
+                into that role all at once. I grew into it because it needed doing.
               </p>
               <p>
                 Charlie was diagnosed autistic in 2013. During the assessment process many of the
-                observations sounded familiar. Comments such as “You weren&apos;t potty trained
-                until late either” and “He&apos;s a copy of you” started appearing regularly.
+                observations sounded familiar. People often commented that he was my double or a
+                copy of me. Comments about my own childhood, including late potty training, helped
+                me recognise similarities without turning this page into private medical detail.
               </p>
               <p>
                 What began as a process of understanding my son gradually became a process of
@@ -148,7 +161,7 @@ export function Journey() {
         </div>
       </Section>
 
-      <Section title="What Caring Taught Me">
+      <Section title="What caring taught me professionally">
         <div className="grid gap-5 md:grid-cols-2">
           {skillsFromCaring.map((skill) => (
             <article key={skill.title} className="surface-card p-6">
@@ -181,14 +194,14 @@ export function Journey() {
             <p>If something needs doing, I do it.</p>
             <p>If there is a problem, I work towards a solution.</p>
             <p>If somebody depends on me, I step forward.</p>
-            <p>The line often stops with me.</p>
+            <p>The line stops with me.</p>
             <p>That responsibility has shaped how I approach both life and work.</p>
             <p>I do not expect obstacles to disappear. I expect to work through them.</p>
           </div>
         </div>
       </Section>
 
-      <Section title="Technology and Systems Thinking">
+      <Section title="Professional translation">
         <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
           <article className="surface-card p-6">
             <h2 className="text-2xl font-semibold text-white">Skills strengthened by experience</h2>
@@ -203,8 +216,10 @@ export function Journey() {
           <article className="surface-card p-6">
             <h2 className="text-2xl font-semibold text-white">Applied to engineering work</h2>
             <p className="mt-4 body-copy">
-              These are the same skills I now apply to cloud infrastructure, platform support,
-              automation and software delivery.
+              Being a carer changed how I work. It taught me how to teach, how to simplify a process
+              without losing the important detail, and how much difference consistent effort makes
+              over time. These are the same skills I now apply to cloud infrastructure, platform
+              support, automation and software delivery.
             </p>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {journeyCloudApplications.map((item) => (
@@ -238,7 +253,7 @@ export function Journey() {
         </div>
       </Section>
 
-      <Section title="Image placeholders">
+      <Section title="Personal image support">
         <div className="grid gap-4 md:grid-cols-2">
           {journeyImages.slice(1).map((image) => (
             <JourneyImageCard key={image.src} image={image} />
@@ -255,6 +270,10 @@ export function Journey() {
             <p>I understand resilience.</p>
             <p>I understand that meaningful results are built through consistent effort.</p>
             <p>When I commit to something, I intend to see it through.</p>
+            <p>
+              I do not present resilience as a slogan. I present it as evidence. If I put my hat in
+              the ring, I mean to make it count.
+            </p>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {journeyPrinciples.map((principle) => (

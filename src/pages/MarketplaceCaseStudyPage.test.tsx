@@ -27,6 +27,15 @@ describe('MarketplaceCaseStudyPage', () => {
     expect(screen.getByRole('heading', { name: project.title })).toBeInTheDocument();
     expect(screen.getByText(project.challenge)).toBeInTheDocument();
     expect(
+      screen.getByRole('heading', { name: 'Why this matters to the business' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Why this matters to the customer' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'What I would validate first' }),
+    ).toBeInTheDocument();
+    expect(
       screen.getByText('Postcode or geocoding service, provider to be selected during discovery.'),
     ).toBeInTheDocument();
     expect(
@@ -40,6 +49,7 @@ describe('MarketplaceCaseStudyPage', () => {
 
     expect(screen.getByRole('heading', { name: project.title })).toBeInTheDocument();
     expect(screen.getByText(project.challenge)).toBeInTheDocument();
+    expect(screen.getByText(project.validationPlan[0])).toBeInTheDocument();
     expect(
       screen.getByText(
         'Deposit payment provider, deliberately unspecified until requirements are validated.',

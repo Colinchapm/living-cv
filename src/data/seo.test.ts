@@ -4,7 +4,13 @@ import { describe, expect, it } from 'vitest';
 import { portfolioProjects } from './portfolio';
 import { siteRoutes } from './routes';
 import { siteConfig } from './site';
-import { personJsonLd, projectJsonLd } from './structuredData';
+import { marketplaceCaseStudies } from './marketplaceCaseStudies';
+import {
+  journeyProfilePageJsonLd,
+  marketplaceCaseStudyJsonLd,
+  personJsonLd,
+  projectJsonLd,
+} from './structuredData';
 
 const root = process.cwd();
 
@@ -29,12 +35,23 @@ describe('SEO configuration', () => {
     const person = personJsonLd();
     expect(JSON.stringify(person)).toContain('Colin Chapman');
     expect(JSON.stringify(person)).not.toContain('contact@example.com');
+    expect(journeyProfilePageJsonLd()).toMatchObject({
+      '@type': 'ProfilePage',
+      url: `${siteConfig.productionUrl}/journey`,
+    });
 
     for (const project of portfolioProjects) {
       expect(() => JSON.stringify(projectJsonLd(project))).not.toThrow();
       expect(projectJsonLd(project)).toMatchObject({
         '@type': 'SoftwareApplication',
         operatingSystem: 'Web',
+      });
+    }
+
+    for (const project of marketplaceCaseStudies) {
+      expect(marketplaceCaseStudyJsonLd(project)).toMatchObject({
+        '@type': 'CreativeWork',
+        url: `${siteConfig.productionUrl}/portfolio/${project.slug}`,
       });
     }
   });
