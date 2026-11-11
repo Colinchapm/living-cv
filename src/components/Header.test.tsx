@@ -6,6 +6,7 @@ import { AppLayout } from './AppLayout';
 import { Home } from '../pages/Home';
 import { Contact } from '../pages/Contact';
 import { Portfolio } from '../pages/Portfolio';
+import { EBWOverview, CheerUpGothOverview } from '../pages/VentureOverview';
 
 function renderHeader(path = '/') {
   const router = createMemoryRouter(
@@ -17,6 +18,8 @@ function renderHeader(path = '/') {
           { index: true, element: <Home /> },
           { path: 'portfolio', element: <Portfolio /> },
           { path: 'contact', element: <Contact /> },
+          { path: 'ebw', element: <EBWOverview /> },
+          { path: 'cheer-up-goth', element: <CheerUpGothOverview /> },
         ],
       },
     ],
@@ -42,6 +45,27 @@ describe('Header', () => {
       'href',
       '/contact',
     );
+  });
+
+  it('renders three accessible site-area tabs and switches to their preview pages', async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    const areas = screen.getByRole('navigation', { name: /site areas/i });
+    expect(within(areas).getByRole('link', { name: 'Living CV' })).toHaveAttribute('href', '/');
+    expect(within(areas).getByRole('link', { name: 'EBW' })).toHaveAttribute('href', '/ebw');
+    expect(within(areas).getByRole('link', { name: 'Cheer Up Goth' })).toHaveAttribute(
+      'href',
+      '/cheer-up-goth',
+    );
+
+    await user.click(within(areas).getByRole('link', { name: 'EBW' }));
+    expect(await screen.findByRole('heading', { name: /a new platform for british wrestling/i })).toBeInTheDocument();
+    expect(within(areas).getByRole('link', { name: 'EBW' })).toHaveAttribute('aria-current', 'page');
+
+    await user.click(within(areas).getByRole('link', { name: 'Cheer Up Goth' }));
+    expect(await screen.findByRole('heading', { name: /because weekends are for the living/i })).toBeInTheDocument();
+    expect(within(areas).getByRole('link', { name: 'Cheer Up Goth' })).toHaveAttribute('aria-current', 'page');
   });
 
   it('navigates between pages with primary navigation links', async () => {

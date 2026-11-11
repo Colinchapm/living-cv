@@ -8,6 +8,7 @@ import { Home } from './pages/Home';
 import { Portfolio } from './pages/Portfolio';
 import { ProjectCaseStudy } from './pages/ProjectCaseStudy';
 import { Skills } from './pages/Skills';
+import { EBWOverview, CheerUpGothOverview } from './pages/VentureOverview';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,8 @@ export const router = createBrowserRouter([
       { path: 'portfolio', element: <Portfolio /> },
       { path: 'projects/:slug', element: <ProjectCaseStudy /> },
       { path: 'contact', element: <Contact /> },
+      { path: 'ebw', element: <EBWOverview /> },
+      { path: 'cheer-up-goth', element: <CheerUpGothOverview /> },
     ],
   },
 ]);
